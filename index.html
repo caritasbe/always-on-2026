@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Always On 2026 — Caritas</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e20817;--beige:#f7dad0;--pink:#ff21a6;--orange:#ff5823;--dark:#1a1a1a;--mid:#6b6b6b;--light:#f9f4f2;--border:#ecddd8;--white:#ffffff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--dark);font-size:14px;line-height:1.5;}
+
+.header{background:var(--red);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:12px;}
+
+.header-tag{font-size:11px;color:rgba(255,255,255,0.65);letter-spacing:.1em;text-transform:uppercase;}
+
+.top-nav{background:white;border-bottom:1px solid var(--border);padding:0 2rem;display:flex;overflow-x:auto;}
+.top-btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--mid);background:none;border:none;padding:14px 20px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;}
+.top-btn:hover{color:var(--red);}
+.top-btn.active{color:var(--red);border-bottom-color:var(--red);}
+
+.content{max-width:1140px;margin:0 auto;padding:2rem;}
+.section{display:none;}
+.section.active{display:block;}
+
+.page-title{margin-bottom:1.75rem;}
+.page-title h1{font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:4px;}
+.page-title p{font-size:13px;color:var(--mid);}
+
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.75rem;}
+.metric{background:white;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;position:relative;overflow:hidden;}
+.metric::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.m-red::before{background:var(--red);}
+.m-orange::before{background:var(--orange);}
+.m-pink::before{background:var(--pink);}
+.m-beige::before{background:#c8906e;}
+.metric-label{font-size:11px;font-weight:500;color:var(--mid);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
+.metric-value{font-family:'DM Serif Display',serif;font-size:26px;color:var(--dark);line-height:1;margin-bottom:3px;}
+.metric-sub{font-size:11px;color:var(--mid);}
+
+.card{background:white;border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;}
+.card-title{font-size:11px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
+.card-title::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;}
+
+.badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;}
+.s-encours{background:#e6f1fb;color:#185fa5;border:1px solid #b5d4f4;}
+.s-planifie{background:#f3f3f3;color:#666;border:1px solid #ddd;}
+.s-planife{background:#f3f3f3;color:#666;border:1px solid #ddd;}
+.s-adefinir{background:#fff8ec;color:#d4730a;border:1px solid #ffd98a;}
+.s-done{background:#edfaf4;color:#1a8a52;border:1px solid #b8ebd1;}
+.ch-pill{display:inline-block;font-size:10px;font-weight:500;padding:1px 6px;border-radius:3px;margin:1px 2px 1px 0;background:var(--beige);color:#8a4030;border:1px solid #e8c4b8;}
+
+.sub-nav{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.sub-btn{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:6px 16px;border:1px solid var(--border);border-radius:20px;background:white;color:var(--mid);cursor:pointer;transition:all .15s;}
+.sub-btn:hover{border-color:var(--red);color:var(--red);}
+.sub-btn.active{background:var(--red);color:white;border-color:var(--red);}
+.subview{display:none;}
+.subview.active{display:block;}
+
+/* GANTT */
+.gantt-wrap{overflow-x:auto;}
+.gantt{min-width:700px;}
+.g-header{display:grid;grid-template-columns:190px repeat(7,1fr);font-size:10px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:4px;}
+.g-header span{text-align:center;}
+.g-row{display:grid;grid-template-columns:190px repeat(7,1fr);align-items:center;min-height:42px;border-bottom:1px solid var(--border);}
+.g-row:last-child{border-bottom:none;}
+.g-label{font-size:12px;font-weight:500;padding:4px 10px 4px 0;line-height:1.35;}
+.g-label span{display:block;font-size:10px;color:var(--mid);font-weight:400;margin-top:2px;}
+.g-cell{position:relative;height:42px;grid-column:2/span 7;}
+.g-bar{position:absolute;top:50%;transform:translateY(-50%);height:18px;border-radius:4px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:600;white-space:nowrap;overflow:hidden;}
+.g-today{position:absolute;top:0;bottom:0;width:2px;background:var(--red);z-index:2;}
+.g-today::after{content:'▼';position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--red);}
+
+/* KANBAN */
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:start;}
+.col-head{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding-bottom:8px;margin-bottom:8px;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.col-count{font-size:10px;background:var(--light);border-radius:10px;padding:1px 6px;color:var(--mid);}
+.k-card{background:white;border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:8px;cursor:pointer;transition:border-color .15s,transform .1s;}
+.k-card:hover{border-color:var(--red);transform:translateY(-1px);}
+.k-phase{font-size:9px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;}
+.k-title{font-size:12px;font-weight:500;margin-bottom:5px;line-height:1.4;}
+.k-meta{font-size:11px;color:var(--mid);}
+.k-dl{font-size:10px;color:var(--mid);margin-top:4px;}
+
+/* TABLE */
+.filters{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;}
+.filters select{font-family:'DM Sans',sans-serif;font-size:12px;padding:6px 12px;border:1px solid var(--border);border-radius:20px;background:white;color:var(--dark);cursor:pointer;outline:none;}
+.filters select:focus{border-color:var(--red);}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{font-size:10px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:0 10px 10px 0;border-bottom:1px solid var(--border);}
+td{padding:10px 10px 10px 0;border-bottom:1px solid var(--border);color:var(--dark);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+.row-link{cursor:pointer;}
+.row-link:hover td{background:#fdf7f5;}
+
+/* LIVRABLES */
+.liv-card{background:white;border:1px solid var(--border);border-radius:10px;padding:1rem 1.4rem;margin-bottom:10px;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;transition:border-color .15s,transform .1s;}
+.liv-card:hover{border-color:var(--red);transform:translateY(-1px);}
+.liv-phase-tag{font-size:9px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;}
+.liv-title{font-size:14px;font-weight:500;margin-bottom:6px;}
+.liv-meta{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--mid);align-items:center;}
+.liv-arrow{font-size:20px;color:var(--border);align-self:center;flex-shrink:0;}
+.liv-card:hover .liv-arrow{color:var(--red);}
+
+/* DETAIL */
+.det-back{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:7px 16px;border:1px solid var(--border);border-radius:20px;background:white;color:var(--mid);cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-bottom:1.5rem;transition:all .15s;}
+.det-back:hover{border-color:var(--red);color:var(--red);}
+.det-hero{border-radius:10px;padding:1.5rem;margin-bottom:1.25rem;color:white;}
+.det-phase-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;opacity:.75;margin-bottom:6px;}
+.det-title{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:10px;}
+.det-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem;}
+.det-field{background:white;border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;}
+.det-field-label{font-size:10px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.det-field-val{font-size:13px;font-weight:500;}
+.det-section{margin-bottom:1rem;}
+.det-stitle{font-size:10px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
+.det-card{background:white;border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;font-size:13px;line-height:1.7;}
+.fmt-block{margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.fmt-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.fmt-canal{font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.fmt-specs{font-size:12px;color:var(--mid);}
+.notes-area{width:100%;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--dark);background:transparent;border:none;resize:vertical;min-height:70px;line-height:1.6;outline:none;}
+
+/* BUDGET */
+.funnel-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:1.5rem;}
+.f-card{border-radius:10px;padding:1.1rem 1.25rem;border:1px solid transparent;}
+.f-tofu{background:#fff0eb;border-color:#ffd0be;}
+.f-mofu{background:#fff8ec;border-color:#ffd98a;}
+.f-bofu{background:#edfaf4;border-color:#b8ebd1;}
+.f-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
+.f-tofu .f-label{color:var(--orange);}
+.f-mofu .f-label{color:#d4730a;}
+.f-bofu .f-label{color:#1a8a52;}
+.f-amount{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:4px;}
+.f-tofu .f-amount{color:#c44200;}
+.f-mofu .f-amount{color:#8a5800;}
+.f-bofu .f-amount{color:#0e5c35;}
+.f-detail{font-size:11px;line-height:1.6;color:var(--mid);}
+.bud-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);}
+.bud-row:last-child{border-bottom:none;}
+.bud-name{width:160px;font-weight:500;font-size:13px;}
+.bud-outer{flex:1;background:var(--light);border-radius:4px;height:7px;overflow:hidden;}
+.bud-inner{height:100%;border-radius:4px;}
+.bud-amount{width:110px;text-align:right;font-size:12px;color:var(--mid);}
+
+.phase-budget-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem;}
+.pb-card{background:white;border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;}
+.pb-phase{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.pb-amount{font-family:'DM Serif Display',serif;font-size:20px;color:var(--dark);margin-bottom:2px;}
+.pb-grants{font-size:11px;color:var(--mid);}
+
+.footer{text-align:center;padding:2rem;font-size:11px;color:var(--mid);border-top:1px solid var(--border);margin-top:2rem;}
+.footer span{color:var(--red);font-weight:600;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">
+    <div style="font-family:'DM Serif Display',serif;color:white;font-size:18px;letter-spacing:0.01em;">Caritas International</div>
+  </div>
+  <div class="header-tag">Always On 2026</div>
+</header>
+
+<nav class="top-nav">
+  <button class="top-btn active" onclick="switchSection('overview',this)">Vue d'ensemble</button>
+  <button class="top-btn" onclick="switchSection('phases',this)">Phases</button>
+  <button class="top-btn" onclick="switchSection('planning',this)">Planning</button>
+  <button class="top-btn" onclick="switchSection('livrables',this)">Livrables</button>
+  <button class="top-btn" onclick="switchSection('budget',this)">Budget</button>
+</nav>
+
+<main class="content">
+
+<!-- OVERVIEW -->
+<div id="sec-overview" class="section active">
+  <div class="page-title">
+    <h1>Always On 2026</h1>
+    <p>Fil rouge narratif · 5 phases · 27 livrables · Budget 80 000€ + 120 000€ Google Grants</p>
+  </div>
+  <div class="metric-grid">
+    <div class="metric m-red"><div class="metric-label">Budget activable</div><div class="metric-value">72 000€</div><div class="metric-sub">+ 8k€ réserve</div></div>
+    <div class="metric m-orange"><div class="metric-label">Google Grants</div><div class="metric-value">120 000€</div><div class="metric-sub">BOFU gratuit</div></div>
+    <div class="metric m-pink"><div class="metric-label">Livrables</div><div class="metric-value">27</div><div class="metric-sub">6 en cours · 21 planifiés</div></div>
+    <div class="metric m-beige"><div class="metric-label">ROI cible</div><div class="metric-value">&gt; 3:1</div><div class="metric-sub">Canaux actifs : 5</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Fil rouge narratif</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fff0eb;border-radius:8px;border:1px solid #ff582322;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#ff5823;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">1</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#a03500;">Mission & Identité</div><div style="font-size:11px;color:#a03500;opacity:.8;">Présenter Caritas · 6 livrables</div></div>
+        <div style="font-size:11px;color:#a03500;opacity:.7;">01/06 → 05/07</div>
+        <span style="font-size:11px;font-weight:600;background:#ff5823;color:white;padding:2px 10px;border-radius:20px;">8 000€</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fcebeb;border-radius:8px;border:1px solid #e2081722;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#e20817;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">2</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#8a0010;">L'Urgence</div><div style="font-size:11px;color:#8a0010;opacity:.8;">Urgences humanitaires & conflits · 5 livrables</div></div>
+        <div style="font-size:11px;color:#8a0010;opacity:.7;">06/07 → 09/08</div>
+        <span style="font-size:11px;font-weight:600;background:#e20817;color:white;padding:2px 10px;border-radius:20px;">14 000€</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fdf0fa;border-radius:8px;border:1px solid #ff21a622;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#ff21a6;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">3</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#8a0060;">Migration</div><div style="font-size:11px;color:#8a0060;opacity:.8;">Conséquences de l'urgence · 4 livrables</div></div>
+        <div style="font-size:11px;color:#8a0060;opacity:.7;">10/08 → 13/09</div>
+        <span style="font-size:11px;font-weight:600;background:#ff21a6;color:white;padding:2px 10px;border-radius:20px;">12 000€</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fdf7f5;border-radius:8px;border:1px solid #c8906e22;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#c8906e;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">3b</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#6b4030;">Mission & Identité (rappel)</div><div style="font-size:11px;color:#6b4030;opacity:.8;">Rappel à mi-parcours · 3 livrables</div></div>
+        <div style="font-size:11px;color:#6b4030;opacity:.7;">14/09 → 18/10</div>
+        <span style="font-size:11px;font-weight:600;background:#c8906e;color:white;padding:2px 10px;border-radius:20px;">6 000€</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#f3f3f3;border-radius:8px;border:1px solid #88888822;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#888;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">4</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#444;">Coopération & Développement</div><div style="font-size:11px;color:#444;opacity:.8;">Ce que Caritas fait sur le terrain · 5 livrables</div></div>
+        <div style="font-size:11px;color:#444;opacity:.7;">19/10 → 22/11</div>
+        <span style="font-size:11px;font-weight:600;background:#888;color:white;padding:2px 10px;border-radius:20px;">10 000€</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#edfaf4;border-radius:8px;border:1px solid #1a8a5222;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#1a8a52;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">5</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#0e5c35;">Conversion — Full dons</div><div style="font-size:11px;color:#0e5c35;opacity:.8;">6 semaines de conversion pure · 5 livrables</div></div>
+        <div style="font-size:11px;color:#0e5c35;opacity:.7;">23/11 → 31/12</div>
+        <span style="font-size:11px;font-weight:600;background:#1a8a52;color:white;padding:2px 10px;border-radius:20px;">22 000€</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASES -->
+<div id="sec-phases" class="section">
+  <div class="page-title"><h1>Phases</h1><p>6 phases narratives · Juin → Décembre 2026</p></div>
+  <div id="phases-content"></div>
+</div>
+
+<!-- PLANNING -->
+<div id="sec-planning" class="section">
+  <div class="page-title"><h1>Planning</h1><p>Juin → Décembre 2026</p></div>
+  <div class="sub-nav">
+    <button class="sub-btn active" onclick="switchSub('gantt',this)">Gantt</button>
+    <button class="sub-btn" onclick="switchSub('kanban',this)">Kanban</button>
+    <button class="sub-btn" onclick="switchSub('tableau',this)">Tableau</button>
+  </div>
+  <div id="sub-gantt" class="subview active"><div class="card" id="gantt-card"></div></div>
+  <div id="sub-kanban" class="subview"><div id="kanban-content"></div></div>
+  <div id="sub-tableau" class="subview">
+    <div class="filters">
+      <select id="ft-phase" onchange="filterTab()"><option value="">Toutes phases</option></select>
+      <select id="ft-statut" onchange="filterTab()"><option value="">Tous statuts</option><option>en cours</option><option>planifié</option><option>planifé</option><option>À définir</option></select>
+      <select id="ft-canal" onchange="filterTab()"><option value="">Tous canaux</option><option>META</option><option>TikTok</option><option>YouTube</option><option>Search</option><option>Display</option><option>Grants</option></select>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden;"><table><thead><tr>
+      <th style="padding-left:1.5rem;width:80px;">Phase</th>
+      <th>Titre</th>
+      <th style="width:150px;">Canaux</th>
+      <th style="width:95px;">Prod.</th>
+      <th style="width:95px;">Mise en ligne</th>
+      <th style="width:90px;">Responsable</th>
+      <th style="width:75px;">Statut</th>
+    </tr></thead><tbody id="tab-body"></tbody></table></div>
+  </div>
+</div>
+
+<!-- LIVRABLES -->
+<div id="sec-livrables" class="section">
+  <div id="liv-list">
+    <div class="page-title"><h1>Livrables</h1><p>27 contenus · Cliquer pour le détail complet</p></div>
+    <div class="filters">
+      <select id="lf-phase" onchange="filterLiv()"><option value="">Toutes phases</option></select>
+      <select id="lf-statut" onchange="filterLiv()"><option value="">Tous statuts</option><option>en cours</option><option>planifié</option><option>planifé</option><option>À définir</option></select>
+      <select id="lf-canal" onchange="filterLiv()"><option value="">Tous canaux</option><option>META</option><option>TikTok</option><option>YouTube</option><option>Search</option><option>Display</option><option>Grants</option></select>
+    </div>
+    <div id="liv-cards"></div>
+  </div>
+  <div id="liv-detail" style="display:none;"></div>
+</div>
+
+<!-- BUDGET -->
+<div id="sec-budget" class="section">
+  <div class="page-title"><h1>Budget & Funnel</h1><p>72 000€ activables + 120 000€ Google Grants</p></div>
+  <div class="funnel-grid">
+    <div class="f-card f-tofu"><div class="f-label">TOFU — Awareness</div><div class="f-amount">35 000€</div><div class="f-detail">48% · TikTok, YT, META<br>2M+ personnes · CPM &lt; 8€</div></div>
+    <div class="f-card f-mofu"><div class="f-label">MOFU — Considération</div><div class="f-amount">25 000€</div><div class="f-detail">35% · META, Display, YT<br>400k visiteurs · CTR &gt; 1.5%</div></div>
+    <div class="f-card f-bofu"><div class="f-label">BOFU — Conversion</div><div class="f-amount">12 000€</div><div class="f-detail">17% · META, Search<br>+ 120k€ Grants · CPA &lt; 80€</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Budget par phase</div>
+    <div class="phase-budget-grid">
+      <div class="pb-card"><div class="pb-phase" style="color:#ff5823;">Phase 1 — Mission & Identité</div><div class="pb-amount">8 000€</div><div class="pb-grants">+ 10 000€ Grants</div></div>
+      <div class="pb-card"><div class="pb-phase" style="color:#e20817;">Phase 2 — L'Urgence</div><div class="pb-amount">14 000€</div><div class="pb-grants">+ 25 000€ Grants</div></div>
+      <div class="pb-card"><div class="pb-phase" style="color:#ff21a6;">Phase 3 — Migration</div><div class="pb-amount">12 000€</div><div class="pb-grants">+ 20 000€ Grants</div></div>
+      <div class="pb-card"><div class="pb-phase" style="color:#c8906e;">Phase 3bis — Identité rappel</div><div class="pb-amount">6 000€</div><div class="pb-grants">+ 10 000€ Grants</div></div>
+      <div class="pb-card"><div class="pb-phase" style="color:#888;">Phase 4 — Coopération</div><div class="pb-amount">10 000€</div><div class="pb-grants">+ 15 000€ Grants</div></div>
+      <div class="pb-card"><div class="pb-phase" style="color:#1a8a52;">Phase 5 — Conversion</div><div class="pb-amount">22 000€</div><div class="pb-grants">+ 40 000€ Grants</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Répartition par canal</div>
+    <div class="bud-row"><span class="bud-name">Meta (FB + IG)</span><div class="bud-outer"><div class="bud-inner" style="width:44%;background:#e20817;"></div></div><span class="bud-amount">32 000€ · 44%</span></div>
+    <div class="bud-row"><span class="bud-name">YouTube</span><div class="bud-outer"><div class="bud-inner" style="width:25%;background:#ff5823;"></div></div><span class="bud-amount">18 000€ · 25%</span></div>
+    <div class="bud-row"><span class="bud-name">TikTok</span><div class="bud-outer"><div class="bud-inner" style="width:22%;background:#ff21a6;"></div></div><span class="bud-amount">16 000€ · 22%</span></div>
+    <div class="bud-row"><span class="bud-name">Display</span><div class="bud-outer"><div class="bud-inner" style="width:6%;background:#c8906e;"></div></div><span class="bud-amount">4 000€ · 6%</span></div>
+    <div class="bud-row"><span class="bud-name">Google Search</span><div class="bud-outer"><div class="bud-inner" style="width:3%;background:#888;"></div></div><span class="bud-amount">2 000€ · 3%</span></div>
+    <div class="bud-row" style="background:var(--light);border-radius:6px;padding:8px 10px;margin-top:6px;"><span class="bud-name" style="color:var(--mid);font-weight:400;">Réserve</span><div class="bud-outer"><div class="bud-inner" style="width:10%;background:#ccc;"></div></div><span class="bud-amount" style="color:var(--mid);">8 000€ · 10%</span></div>
+  </div>
+</div>
+
+</main>
+
+<footer class="footer">
+  <span>Caritas International Belgique</span> · Dashboard Always On 2026 · Humanity is Unstoppable
+</footer>
+
+<script>
+const PHASES = {
+  phase1:    {label:'Phase 1 — Mission & Identité',   short:'P1', bar:'#ff5823', bg:'#fff0eb', text:'#a03500'},
+  phase2:    {label:'Phase 2 — L\'Urgence',            short:'P2', bar:'#e20817', bg:'#fcebeb', text:'#8a0010'},
+  phase3:    {label:'Phase 3 — Migration',             short:'P3', bar:'#ff21a6', bg:'#fdf0fa', text:'#8a0060'},
+  phase3bis: {label:'Phase 3bis — Identité (rappel)',  short:'P3b',bar:'#c8906e', bg:'#fdf7f5', text:'#6b4030'},
+  phase4:    {label:'Phase 4 — Coopération & Dev.',    short:'P4', bar:'#888888', bg:'#f3f3f3', text:'#444'},
+  phase5:    {label:'Phase 5 — Conversion',            short:'P5', bar:'#1a8a52', bg:'#edfaf4', text:'#0e5c35'},
+};
+
+const STATUT_CLASS = {'en cours':'s-encours','planifié':'s-planifie','planifé':'s-planife','à définir en fonction du sujet':'s-adefinir','livré':'s-done'};
+
+const LIVRABLES = [
+  {id:'p1-v1',phase:'phase1',titre:'Réseau mondial',statut:'en cours',canaux:'META, TikTok, YouTube, Grants',responsable:'Maude',prod:'01/06/2026',ligne:'01/06/2026',funnel:'TOFU',budget:'8 000€',
+   objectif:'Montrer que Caritas n\'est pas une petite ONG belge isolée mais un réseau présent dans 200 pays. L\'objectif est de créer un sentiment d\'ampleur et de légitimité. Le spectateur doit se dire "ils sont vraiment partout, ils savent ce qu\'ils font".',
+   formats:'META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · Stories 1080x1920px · In-stream 1280x720px | TikTok : In-feed 1080x1920px | YouTube : Skippable 1920x1080px · Shorts 1080x1920px',notes:''},
+  {id:'p1-v2',phase:'phase1',titre:'Qui sommes-nous ? (une personne = un projet)',statut:'en cours',canaux:'META, TikTok, YouTube, Grants',responsable:'Maude',prod:'01/06/2026',ligne:'01/06/2026',funnel:'TOFU',budget:'',
+   objectif:'Humaniser Caritas en cassant l\'image d\'institution abstraite. On ne parle pas de chiffres ou de programmes : on suit une personne réelle et son projet.',
+   formats:'META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · Stories 1080x1920px · In-stream 1280x720px | TikTok : In-feed 1080x1920px | YouTube : Skippable 1920x1080px · Shorts 1080x1920px',notes:''},
+  {id:'p1-v3a',phase:'phase1',titre:'Valeur 1 — Dignité',statut:'en cours',canaux:'META, TikTok, LinkedIn, Grants',responsable:'Maude',prod:'01/06/2026',ligne:'01/06/2026',funnel:'TOFU',budget:'',
+   objectif:'Un collaborateur explique comment il applique la dignité dans son travail quotidien. Une situation réelle, un geste, une décision. Renforcer la fierté d\'appartenance en interne ET montrer que les valeurs sont vécues, pas affichées.',
+   formats:'META : Reels 1080x1920px · Stories 1080x1920px · Feed 1080x1350px | TikTok : In-feed 1080x1920px | LinkedIn : Vidéo sponsorisée 1920x1080px · 1080x1080px',notes:''},
+  {id:'p1-v3b',phase:'phase1',titre:'Valeur 2 — Solidarité',statut:'en cours',canaux:'META, TikTok, LinkedIn, Grants',responsable:'Maude',prod:'01/06/2026',ligne:'01/06/2026',funnel:'TOFU',budget:'',
+   objectif:'Un collaborateur raconte un moment où la solidarité a fait une vraie différence — avec un collègue, un bénéficiaire, un partenaire. Montrer que la solidarité commence en interne avant d\'aller vers l\'extérieur.',
+   formats:'META : Reels 1080x1920px · Stories 1080x1920px · Feed 1080x1350px | TikTok : In-feed 1080x1920px | LinkedIn : Vidéo sponsorisée 1920x1080px · 1080x1080px',notes:''},
+  {id:'p1-v3c',phase:'phase1',titre:'Valeur 3 — Engagement',statut:'en cours',canaux:'META, TikTok, LinkedIn, Grants',responsable:'Maude',prod:'01/06/2026',ligne:'01/06/2026',funnel:'TOFU',budget:'',
+   objectif:'Un collaborateur explique pourquoi il est encore là après X années. Ce qui le retient, ce qui donne du sens. Répondre à la question implicite : "est-ce que les gens qui travaillent là y croient vraiment ?"',
+   formats:'META : Reels 1080x1920px · Stories 1080x1920px · Feed 1080x1350px | TikTok : In-feed 1080x1920px | LinkedIn : Vidéo sponsorisée 1920x1080px · 1080x1080px',notes:''},
+  {id:'p1-v3d',phase:'phase1',titre:'Valeur 4 — Justice',statut:'en cours',canaux:'META, TikTok, LinkedIn, Grants',responsable:'Maude',prod:'01/06/2026',ligne:'01/06/2026',funnel:'TOFU',budget:'',
+   objectif:'Un collaborateur raconte un moment où il a dû défendre la justice dans son travail. Montrer que Caritas ne subit pas les injustices, elle les combat de l\'intérieur.',
+   formats:'META : Reels 1080x1920px · Stories 1080x1920px · Feed 1080x1350px | TikTok : In-feed 1080x1920px | LinkedIn : Vidéo sponsorisée 1920x1080px · 1080x1080px',notes:''},
+
+  {id:'p2-c1',phase:'phase2',titre:'C\'est quoi une urgence / conflit ?',statut:'planifié',canaux:'TikTok, YouTube, Grants',responsable:'—',prod:'29/06/2026',ligne:'06/07/2026',funnel:'TOFU',budget:'14 000€',
+   objectif:'Expliquer simplement et sans jargon ce que signifie "urgence humanitaire". Créer le contexte nécessaire pour que tout ce qui suit dans la phase ait du sens. Sans ce socle, le public ne comprend pas pourquoi Caritas intervient.',
+   formats:'TikTok : In-feed 1080x1920px | YouTube : Skippable 1920x1080px · Shorts 1080x1920px',notes:''},
+  {id:'p2-c2',phase:'phase2',titre:'Qu\'est-ce que Caritas fait concrètement ?',statut:'planifié',canaux:'META, YouTube, Grants',responsable:'—',prod:'29/06/2026',ligne:'06/07/2026',funnel:'TOFU + MOFU',budget:'',
+   objectif:'Répondre à "concrètement, quand il y a une crise, vous faites quoi ?" Rendre l\'action de Caritas tangible — pas "nous aidons les victimes" mais "voici ce qu\'on fait dans les 48h qui suivent une crise".',
+   formats:'META : Feed 1080x1080px · 1080x1350px · In-stream 1280x720px | YouTube : Skippable 1920x1080px',notes:''},
+  {id:'p2-c3',phase:'phase2',titre:'Ce qui pousse à partir — cas concret',statut:'planifié',canaux:'TikTok, META, Grants',responsable:'—',prod:'29/06/2026',ligne:'06/07/2026',funnel:'TOFU',budget:'',
+   objectif:'Mettre un visage et une histoire sur la notion abstraite de "personne déplacée". Provoquer l\'empathie sans misérabilisme — on montre la décision humaine de partir, ce qu\'elle coûte, ce qu\'elle espère.',
+   formats:'META : Reels 1080x1920px · Stories 1080x1920px · Feed 1080x1350px | TikTok : In-feed 1080x1920px',notes:''},
+  {id:'p2-c4',phase:'phase2',titre:'Focus Moyen-Orient & Ukraine',statut:'planifié',canaux:'META, YouTube, Display, Grants',responsable:'—',prod:'29/06/2026',ligne:'06/07/2026',funnel:'TOFU + MOFU',budget:'',
+   objectif:'Créer un pont entre "j\'en entends parler aux infos" et "Caritas est là-bas, concrètement". Renforcer la crédibilité et la pertinence de Caritas dans l\'actualité.',
+   formats:'META : Feed 1080x1080px · 1080x1350px · In-stream 1280x720px | YouTube : Skippable 1920x1080px | Display : Responsive 1200x628px · 1200x1200px · Rectangle 300x250px · Leaderboard 728x90px',notes:''},
+  {id:'p2-c5',phase:'phase2',titre:'Plaidoyer droit international',statut:'planifié',canaux:'YouTube, Search, Grants',responsable:'—',prod:'29/06/2026',ligne:'06/07/2026',funnel:'MOFU',budget:'',
+   objectif:'Positionner Caritas comme voix experte dans le débat public sur les droits humains. Construire la légitimité institutionnelle auprès des médias, décideurs politiques et partenaires. MOFU long terme.',
+   formats:'YouTube : Skippable 1920x1080px · Shorts 1080x1920px | Search : Format texte · 15 titres 30 car. · 4 descriptions 90 car.',notes:''},
+
+  {id:'p3-c1',phase:'phase3',titre:'WIMS — l\'outil',statut:'planifié',canaux:'META, YouTube, Grants',responsable:'—',prod:'03/08/2026',ligne:'10/08/2026',funnel:'MOFU',budget:'12 000€',
+   objectif:'Donner envie à un maximum de personnes d\'utiliser WIMS — un outil de sensibilisation à la migration accessible à tous. Le contenu montre ce que l\'outil fait vivre. Objectif : provoquer la curiosité et pousser à l\'action — "je veux essayer".',
+   formats:'META : Carrousel 1080x1080px · Reels 1080x1920px · Stories 1080x1920px | TikTok : In-feed 1080x1920px | YouTube : Skippable 1920x1080px · Shorts 1080x1920px',notes:''},
+  {id:'p3-c2',phase:'phase3',titre:'BruZelle',statut:'planifié',canaux:'META, TikTok, YouTube, Grants',responsable:'Céline',prod:'03/08/2026',ligne:'10/08/2026',funnel:'TOFU + MOFU',budget:'',
+   objectif:'Rendre visible ce qui reste habituellement invisible. Le public belge passe devant ces endroits sans savoir ce qui s\'y passe. Ouvrir la porte, montrer les gens, les histoires, la réalité quotidienne.',
+   formats:'META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · In-stream 1280x720px | TikTok : In-feed 1080x1920px | YouTube : Skippable 1920x1080px',notes:''},
+  {id:'p3-c3',phase:'phase3',titre:'Le jeu des chaises',statut:'planifié',canaux:'TikTok, META, Grants',responsable:'—',prod:'03/08/2026',ligne:'10/08/2026',funnel:'TOFU',budget:'',
+   objectif:'Faire ressentir au public ce que vivent les personnes déplacées à travers un format participatif. Créer une expérience émotionnelle directe — pas "regardez leur souffrance" mais "ressentez ce que c\'est de ne pas avoir de place". Conçu pour la viralité organique.',
+   formats:'META : Reels 1080x1920px · Stories 1080x1920px | TikTok : In-feed 1080x1920px · TopView 1080x1920px',notes:''},
+  {id:'p3-c4',phase:'phase3',titre:'Louvranges',statut:'planifié',canaux:'YouTube, META, Grants',responsable:'—',prod:'03/08/2026',ligne:'10/08/2026',funnel:'MOFU',budget:'',
+   objectif:'Montrer la réalité quotidienne du centre de Louvranges — l\'accompagnement, les personnes, les travailleurs. Construire la proximité et la confiance. Louvranges c\'est concret, c\'est en Belgique, c\'est maintenant.',
+   formats:'META : Feed 1080x1080px · 1080x1350px · In-stream 1280x720px | YouTube : Skippable 1920x1080px · Shorts 1080x1920px',notes:''},
+
+  {id:'p3b-v1',phase:'phase3bis',titre:'Réseau mondial (rappel)',statut:'en cours',canaux:'META, TikTok, YouTube, Grants',responsable:'—',prod:'07/09/2026',ligne:'14/09/2026',funnel:'TOFU',budget:'6 000€',
+   objectif:'Après 4 mois d\'exposition à l\'urgence et à la migration, le rappel d\'identité a un effet différent. L\'objectif n\'est plus de se présenter mais de récapituler : "vous savez ce qu\'on fait, voici qui nous sommes et pourquoi vous pouvez nous faire confiance". Pont émotionnel vers la conversion.',
+   formats:'META : Reels 1080x1920px · Feed 1080x1350px | TikTok : Spark Ad 1080x1920px (booster post Phase 1)',notes:''},
+  {id:'p3b-v2',phase:'phase3bis',titre:'Qui sommes-nous (rappel)',statut:'en cours',canaux:'META, TikTok, YouTube, Grants',responsable:'—',prod:'07/09/2026',ligne:'14/09/2026',funnel:'TOFU',budget:'',
+   objectif:'Rappel mission Caritas après les phases urgence/migration. Même logique que p3b-v1 — la confiance est construite, on rappelle l\'identité avant la conversion.',
+   formats:'META : Reels 1080x1920px · Feed 1080x1350px | TikTok : Spark Ad 1080x1920px',notes:''},
+  {id:'p3b-v3',phase:'phase3bis',titre:'4 valeurs (rappel)',statut:'en cours',canaux:'META, TikTok, YouTube, Grants',responsable:'—',prod:'07/09/2026',ligne:'14/09/2026',funnel:'TOFU',budget:'',
+   objectif:'Rappel des 4 valeurs vécues. Réutiliser ou rafraîchir les formats Phase 1. Dernière couche de confiance avant la conversion.',
+   formats:'META : Carrousel 1080x1080px · Feed 1080x1350px | LinkedIn : Sponsored Content 1200x1200px · 1200x628px',notes:''},
+
+  {id:'p4-c1',phase:'phase4',titre:'Coopération & Développement — Sujet 1',statut:'À définir en fonction du sujet',canaux:'À définir en meeting',responsable:'—',prod:'12/10/2026',ligne:'19/10/2026',funnel:'TOFU + MOFU',budget:'10 000€',objectif:'Montrer que Caritas ne fait pas que répondre aux crises — elle travaille sur les causes. L\'accompagnement dans la durée, les solutions locales, le co-développement. Preuve que les dons servent à construire quelque chose de durable.',formats:'À définir en meeting',notes:''},
+  {id:'p4-c2',phase:'phase4',titre:'Coopération & Développement — Sujet 2',statut:'À définir en fonction du sujet',canaux:'À définir en meeting',responsable:'—',prod:'12/10/2026',ligne:'19/10/2026',funnel:'TOFU + MOFU',budget:'',objectif:'Contenu à définir en meeting.',formats:'À définir en meeting',notes:''},
+  {id:'p4-c3',phase:'phase4',titre:'Coopération & Développement — Sujet 3',statut:'À définir en fonction du sujet',canaux:'À définir en meeting',responsable:'—',prod:'12/10/2026',ligne:'19/10/2026',funnel:'TOFU + MOFU',budget:'',objectif:'Contenu à définir en meeting.',formats:'À définir en meeting',notes:''},
+  {id:'p4-c4',phase:'phase4',titre:'Coopération & Développement — Sujet 4',statut:'À définir en fonction du sujet',canaux:'À définir en meeting',responsable:'—',prod:'12/10/2026',ligne:'19/10/2026',funnel:'TOFU + MOFU',budget:'',objectif:'Contenu à définir en meeting.',formats:'À définir en meeting',notes:''},
+  {id:'p4-c5',phase:'phase4',titre:'Coopération & Développement — Sujet 5',statut:'À définir en fonction du sujet',canaux:'À définir en meeting',responsable:'—',prod:'12/10/2026',ligne:'19/10/2026',funnel:'TOFU + MOFU',budget:'',objectif:'Contenu à définir en meeting.',formats:'À définir en meeting',notes:''},
+
+  {id:'p5-c1',phase:'phase5',titre:'Campagne conversion — Vague 1',statut:'planifié',canaux:'META, YouTube, Search, Grants',responsable:'—',prod:'16/11/2026',ligne:'23/11/2026',funnel:'BOFU',budget:'22 000€',
+   objectif:'Première sollicitation directe après 5 mois de contenu. Transformer l\'attention accumulée en premier geste de don. Message : "vous nous connaissez, vous savez ce qu\'on fait, voici comment agir concrètement". Ton sobre — la confiance est déjà construite.',
+   formats:'META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · Stories 1080x1920px | YouTube : Bumper 1920x1080px · Skippable 1920x1080px | Search : Format texte · 15 titres 30 car. | Grants : Format texte',notes:'CPA cible < 80€'},
+  {id:'p5-c2',phase:'phase5',titre:'Campagne conversion — Vague 2',statut:'planifié',canaux:'META, YouTube, Display, Grants',responsable:'—',prod:'16/11/2026',ligne:'23/11/2026',funnel:'BOFU',budget:'',
+   objectif:'Retargeting des non-convertis de la Vague 1 avec un angle différent — preuve d\'impact, résultats concrets, témoignage. Lever le dernier frein : "mon don sert vraiment à quelque chose ?"',
+   formats:'META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px | YouTube : Bumper 1920x1080px | Display : Responsive 1200x628px · 1200x1200px · Rectangle 300x250px · Leaderboard 728x90px · Bannière large 300x600px | Grants : Format texte',notes:''},
+  {id:'p5-c3',phase:'phase5',titre:'Campagne conversion — Vague 3',statut:'planifié',canaux:'META, YouTube, Search, Display, Grants',responsable:'—',prod:'16/11/2026',ligne:'23/11/2026',funnel:'BOFU',budget:'',
+   objectif:'Dernière vague, fin novembre-décembre. Capter les dons de fin d\'année — moment où les gens pensent à donner. Urgence temporelle réelle sans manipulation émotionnelle. Ton direct et factuel.',
+   formats:'META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · Stories 1080x1920px | YouTube : Bumper 1920x1080px | Search : Format texte · 15 titres 30 car. | Display : Rectangle 300x250px · Leaderboard 728x90px · Grand mobile 320x100px | Grants : Format texte',notes:''},
+  {id:'p5-c4',phase:'phase5',titre:'Campagne conversion — Vague 4',statut:'planifié',canaux:'À définir en meeting',responsable:'—',prod:'16/11/2026',ligne:'23/11/2026',funnel:'BOFU',budget:'',objectif:'Convertir audiences chaudes en donateurs.',formats:'À définir en meeting',notes:''},
+  {id:'p5-c5',phase:'phase5',titre:'Campagne conversion — Vague 5',statut:'planifié',canaux:'À définir en meeting',responsable:'—',prod:'16/11/2026',ligne:'23/11/2026',funnel:'BOFU',budget:'',objectif:'Convertir audiences chaudes en donateurs.',formats:'À définir en meeting',notes:''},
+];
+
+function getStatutClass(s) {
+  return STATUT_CLASS[s?.toLowerCase()] || 's-adefinir';
+}
+
+function getStatutLabel(s) {
+  const labels = {'en cours':'En cours','planifié':'Planifié','planifé':'Planifié','à définir en fonction du sujet':'À définir','livré':'Livré'};
+  return labels[s?.toLowerCase()] || s || '—';
+}
+
+// ── PHASES PAGE ─────────────────────────────────────────────────────────
+function buildPhases() {
+  const phaseOrder = ['phase1','phase2','phase3','phase3bis','phase4','phase5'];
+  document.getElementById('phases-content').innerHTML = phaseOrder.map(pid => {
+    const c = PHASES[pid];
+    const livs = LIVRABLES.filter(l => l.phase === pid);
+    return `<div class="card" style="border-left:4px solid ${c.bar};margin-bottom:1.25rem;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:1rem;">
+        <div>
+          <div style="font-size:10px;font-weight:700;color:${c.bar};text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">${livs[0]?.prod||''} → ${livs[0]?.ligne||''}</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:4px;">${c.label.replace(/Phase \w+ — /,'')}</div>
+        </div>
+        <span style="background:${c.bar};color:white;font-size:11px;font-weight:600;padding:3px 12px;border-radius:20px;white-space:nowrap;">${livs.find(l=>l.budget)?.budget||''}</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        ${livs.map(l => `<div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:${c.bg};border-radius:6px;cursor:pointer;" onclick="openDetail('${l.id}')">
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:500;color:${c.text};">${l.titre}</div>
+            <div style="font-size:11px;color:${c.text};opacity:.7;margin-top:2px;">${l.funnel} · ${l.canaux}</div>
+          </div>
+          <div style="font-size:11px;color:${c.text};opacity:.7;">${l.responsable||'—'}</div>
+          <span class="badge ${getStatutClass(l.statut)}">${getStatutLabel(l.statut)}</span>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── GANTT ────────────────────────────────────────────────────────────────
+function buildGantt() {
+  const months = ['Juin','Juil.','Août','Sept.','Oct.','Nov.','Déc.'];
+  const start = new Date('2026-06-01').getTime();
+  const end   = new Date('2026-12-31').getTime();
+  const range = end - start;
+  function pct(ds) {
+    const p = ds.split('/'); const d = new Date(`${p[2]}-${p[1]}-${p[0]}`).getTime();
+    return Math.max(0,Math.min(100,(d-start)/range*100));
+  }
+  const phaseRanges = [
+    {id:'phase1',debut:'01/06/2026',fin:'05/07/2026'},
+    {id:'phase2',debut:'06/07/2026',fin:'09/08/2026'},
+    {id:'phase3',debut:'10/08/2026',fin:'13/09/2026'},
+    {id:'phase3bis',debut:'14/09/2026',fin:'18/10/2026'},
+    {id:'phase4',debut:'19/10/2026',fin:'22/11/2026'},
+    {id:'phase5',debut:'23/11/2026',fin:'31/12/2026'},
+  ];
+  const todayPct = Math.max(0,Math.min(100,(new Date('2026-05-07').getTime()-start)/range*100));
+  document.getElementById('gantt-card').innerHTML = `
+    <div class="gantt-wrap"><div class="gantt">
+      <div class="g-header"><span style="text-align:left;">Phase</span>${months.map(m=>`<span>${m}</span>`).join('')}</div>
+      ${phaseRanges.map(p => {
+        const c = PHASES[p.id];
+        const left = pct(p.debut);
+        const w = Math.max(2, pct(p.fin) - left);
+        return `<div class="g-row">
+          <div class="g-label">${c.label}<span>${p.debut} → ${p.fin}</span></div>
+          <div class="g-cell">
+            <div class="g-bar" style="left:${left}%;width:${w}%;background:${c.bar};color:white;">${c.short}</div>
+            <div class="g-today" style="left:${todayPct}%;"></div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div></div>
+    <div style="margin-top:12px;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mid);">
+      <div style="width:10px;height:10px;border-radius:2px;background:var(--red);"></div> Aujourd'hui — 7 mai 2026 (avant démarrage)
+    </div>`;
+}
+
+// ── KANBAN ───────────────────────────────────────────────────────────────
+function buildKanban() {
+  const cols = [
+    {key:'en cours', label:'En cours', color:'#185fa5'},
+    {key:'planifié', label:'Planifié', color:var_mid()},
+    {key:'À définir', label:'À définir', color:'#d4730a'},
+    {key:'livré', label:'Livré', color:'#1a8a52'},
+  ];
+  document.getElementById('kanban-content').innerHTML = `<div class="kanban">
+    ${cols.map(col => {
+      const items = LIVRABLES.filter(l => {
+        const s = l.statut?.toLowerCase();
+        if (col.key === 'planifié') return s === 'planifié' || s === 'planifé';
+        if (col.key === 'À définir') return s?.includes('définir');
+        return s === col.key;
+      });
+      return `<div>
+        <div class="col-head" style="border-color:${col.color};color:${col.color};">
+          ${col.label} <span class="col-count">${items.length}</span>
+        </div>
+        ${items.map(l => {
+          const c = PHASES[l.phase];
+          return `<div class="k-card" onclick="openDetail('${l.id}');switchSection('livrables',null)">
+            <div class="k-phase">${c.label}</div>
+            <div class="k-title">${l.titre}</div>
+            <div style="margin:4px 0;">${l.canaux.split(',').slice(0,3).map(ch=>`<span class="ch-pill">${ch.trim()}</span>`).join('')}</div>
+            <div class="k-meta">${l.responsable||'—'}</div>
+            <div class="k-dl">🗓 ${l.ligne}</div>
+          </div>`;
+        }).join('')}
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+function var_mid(){return '#6b6b6b';}
+
+// ── TABLEAU ──────────────────────────────────────────────────────────────
+function buildTab(data) {
+  const phaseOrder = ['phase1','phase2','phase3','phase3bis','phase4','phase5'];
+  ['ft-phase','lf-phase'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.options.length <= 1) {
+      phaseOrder.forEach(p => { const o = document.createElement('option'); o.value=p; o.textContent=PHASES[p].label; el.appendChild(o); });
+    }
+  });
+  document.getElementById('tab-body').innerHTML = (data||LIVRABLES).map(l => {
+    const c = PHASES[l.phase];
+    return `<tr class="row-link" onclick="openDetail('${l.id}');switchSection('livrables',null)">
+      <td style="padding-left:1.5rem;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${c.bar};margin-right:4px;"></span><span style="font-size:11px;color:var(--mid);">${c.short}</span></td>
+      <td style="font-weight:500;font-size:12px;">${l.titre}</td>
+      <td>${l.canaux.split(',').slice(0,3).map(ch=>`<span class="ch-pill">${ch.trim()}</span>`).join('')}</td>
+      <td style="font-size:12px;color:var(--mid);">${l.prod}</td>
+      <td style="font-size:12px;color:var(--mid);">${l.ligne}</td>
+      <td style="font-size:12px;color:var(--mid);">${l.responsable||'—'}</td>
+      <td><span class="badge ${getStatutClass(l.statut)}">${getStatutLabel(l.statut)}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function filterTab() {
+  const ph = document.getElementById('ft-phase').value;
+  const st = document.getElementById('ft-statut').value.toLowerCase();
+  const ca = document.getElementById('ft-canal').value;
+  buildTab(LIVRABLES.filter(l =>
+    (!ph||l.phase===ph) &&
+    (!st||l.statut?.toLowerCase().includes(st)) &&
+    (!ca||l.canaux.includes(ca))
+  ));
+}
+
+// ── LIVRABLES LIST ───────────────────────────────────────────────────────
+function buildLivCards(data) {
+  const phaseOrder = ['phase1','phase2','phase3','phase3bis','phase4','phase5'];
+  ['ft-phase','lf-phase'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.options.length <= 1) {
+      phaseOrder.forEach(p => { const o = document.createElement('option'); o.value=p; o.textContent=PHASES[p].label; el.appendChild(o); });
+    }
+  });
+  const el = document.getElementById('liv-cards');
+  el.innerHTML = (data||LIVRABLES).map(l => {
+    const c = PHASES[l.phase];
+    return `<div class="liv-card" onclick="openDetail('${l.id}')">
+      <div style="flex:1;">
+        <div class="liv-phase-tag" style="color:${c.bar};">${c.label}</div>
+        <div class="liv-title">${l.titre}</div>
+        <div class="liv-meta">
+          <span>👤 ${l.responsable||'—'}</span>
+          <span>🗓 ${l.ligne}</span>
+          <span>${l.canaux.split(',').slice(0,3).map(ch=>`<span class="ch-pill">${ch.trim()}</span>`).join('')}</span>
+          <span class="badge ${getStatutClass(l.statut)}">${getStatutLabel(l.statut)}</span>
+        </div>
+      </div>
+      <div class="liv-arrow">›</div>
+    </div>`;
+  }).join('');
+}
+
+function filterLiv() {
+  const ph = document.getElementById('lf-phase').value;
+  const st = document.getElementById('lf-statut').value.toLowerCase();
+  const ca = document.getElementById('lf-canal').value;
+  buildLivCards(LIVRABLES.filter(l =>
+    (!ph||l.phase===ph) &&
+    (!st||l.statut?.toLowerCase().includes(st)) &&
+    (!ca||l.canaux.includes(ca))
+  ));
+}
+
+// ── DETAIL ───────────────────────────────────────────────────────────────
+function openDetail(id) {
+  const l = LIVRABLES.find(x=>x.id===id);
+  if (!l) return;
+  const c = PHASES[l.phase];
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.top-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-livrables').classList.add('active');
+  document.querySelectorAll('.top-btn').forEach(b => {
+    if (b.getAttribute('onclick')?.includes("'livrables'")) b.classList.add('active');
+  });
+  if (!builtLiv) { buildLivCards(); buildTab(); builtLiv=true; }
+  document.getElementById('liv-list').style.display = 'none';
+  const det = document.getElementById('liv-detail');
+  det.style.display = 'block';
+
+  const fmtBlocks = l.formats.split('|').map(f => {
+    const parts = f.trim().split(':');
+    if (parts.length >= 2) {
+      return `<div class="fmt-block"><div class="fmt-canal">${parts[0].trim()}</div><div class="fmt-specs">${parts.slice(1).join(':').trim()}</div></div>`;
+    }
+    return `<div class="fmt-block"><div class="fmt-specs">${f.trim()}</div></div>`;
+  }).join('');
+
+  det.innerHTML = `
+    <button class="det-back" onclick="closeDetail()">← Tous les livrables</button>
+    <div class="det-hero" style="background:${c.bar};">
+      <div class="det-phase-tag">${c.label}</div>
+      <div class="det-title">${l.titre}</div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span class="badge" style="background:rgba(255,255,255,.2);color:white;border:1px solid rgba(255,255,255,.3);">${getStatutLabel(l.statut)}</span>
+        ${l.canaux.split(',').map(ch=>`<span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:3px;background:rgba(255,255,255,.2);color:white;margin:2px;">${ch.trim()}</span>`).join('')}
+      </div>
+    </div>
+    <div class="det-grid">
+      <div class="det-field"><div class="det-field-label">Responsable</div><div class="det-field-val">${l.responsable||'—'}</div></div>
+      <div class="det-field"><div class="det-field-label">Deadline production</div><div class="det-field-val">${l.prod}</div></div>
+      <div class="det-field"><div class="det-field-label">Mise en ligne</div><div class="det-field-val">${l.ligne}</div></div>
+      <div class="det-field"><div class="det-field-label">Funnel</div><div class="det-field-val">${l.funnel}</div></div>
+      ${l.budget?`<div class="det-field"><div class="det-field-label">Budget phase</div><div class="det-field-val">${l.budget}</div></div>`:''}
+    </div>
+    <div class="det-section">
+      <div class="det-stitle">Objectif</div>
+      <div class="det-card">${l.objectif}</div>
+    </div>
+    <div class="det-section">
+      <div class="det-stitle">Formats & Dimensions</div>
+      <div class="det-card">${fmtBlocks}</div>
+    </div>
+    <div class="det-section">
+      <div class="det-stitle">Notes</div>
+      <div class="det-card"><textarea class="notes-area" placeholder="Ajouter des notes…">${l.notes||''}</textarea></div>
+    </div>`;
+  window.scrollTo(0,0);
+}
+
+function closeDetail() {
+  document.getElementById('liv-detail').style.display = 'none';
+  document.getElementById('liv-list').style.display = 'block';
+}
+
+// ── NAV ──────────────────────────────────────────────────────────────────
+let builtPhases=false, builtGantt=false, builtKanban=false, builtTab=false, builtLiv=false;
+
+function switchSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.top-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  if (btn) btn.classList.add('active');
+
+  if (id==='phases' && !builtPhases) { buildPhases(); builtPhases=true; }
+  if (id==='planning') {
+    if (!builtGantt) { buildGantt(); builtGantt=true; }
+    if (!builtKanban) { buildKanban(); builtKanban=true; }
+    if (!builtTab) { buildTab(); builtTab=true; }
+  }
+  if (id==='livrables' && !builtLiv) { buildLivCards(); buildTab(); builtLiv=true; }
+}
+
+function switchSub(id, btn) {
+  document.querySelectorAll('.subview').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.sub-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sub-'+id).classList.add('active');
+  btn.classList.add('active');
+  if (id==='kanban' && !builtKanban) { buildKanban(); builtKanban=true; }
+  if (id==='tableau' && !builtTab) { buildTab(); builtTab=true; }
+}
+</script>
+</body>
+</html>
