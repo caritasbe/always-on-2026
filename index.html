@@ -333,120 +333,455 @@ const STATUT_CLASS = {
 
 const LP_URL = 'https://caritasinternational.sharepoint.com/:x:/r/sites/Dep.COMMOB/Documents%20partages/Com%20Int-Ext/2.%20Online%20external/Digital%20Marketing/02.%20Strategy%20%26%20Dashboards/STRATEGY/STRATEGIE%20DIGITAL%20MARKETING/ALWAYS%20ON/ALWAYS-ON_URLS.xlsx?d=w375688780934415d912fe4b8023c397b&csf=1&web=1&e=5ifxWr';
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Always On 2026 — Caritas</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e20817;--beige:#f7dad0;--pink:#ff21a6;--orange:#ff5823;--dark:#1a1a1a;--mid:#6b6b6b;--light:#f9f4f2;--border:#ecddd8;--white:#ffffff;--linkedin:#0077b5;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--dark);font-size:14px;line-height:1.5;}
+.header{background:var(--red);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;}
+.logo-name{font-family:'DM Serif Display',serif;color:white;font-size:18px;letter-spacing:0.01em;}
+.header-tag{font-size:11px;color:rgba(255,255,255,0.65);letter-spacing:.1em;text-transform:uppercase;}
+.top-nav{background:white;border-bottom:1px solid var(--border);padding:0 2rem;display:flex;overflow-x:auto;}
+.top-btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--mid);background:none;border:none;padding:14px 20px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;}
+.top-btn:hover{color:var(--red);}
+.top-btn.active{color:var(--red);border-bottom-color:var(--red);}
+.content{max-width:1140px;margin:0 auto;padding:2rem;}
+.section{display:none;}
+.section.active{display:block;}
+.page-title{margin-bottom:1.75rem;}
+.page-title h1{font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:4px;}
+.page-title p{font-size:13px;color:var(--mid);}
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.75rem;}
+.metric{background:white;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;position:relative;overflow:hidden;}
+.metric::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.m-red::before{background:var(--red);}
+.m-orange::before{background:var(--orange);}
+.m-pink::before{background:var(--pink);}
+.m-beige::before{background:#c8906e;}
+.metric-label{font-size:11px;font-weight:500;color:var(--mid);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
+.metric-value{font-family:'DM Serif Display',serif;font-size:26px;color:var(--dark);line-height:1;margin-bottom:3px;}
+.metric-sub{font-size:11px;color:var(--mid);}
+.card{background:white;border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;}
+.card-title{font-size:11px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
+.card-title::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;}
+.badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;}
+.s-encours{background:#e6f1fb;color:#185fa5;border:1px solid #b5d4f4;}
+.s-planifie{background:#f1f0e8;color:#5f5e5a;border:1px solid #d3d1c7;}
+.s-adefinir{background:#fff8ec;color:#d4730a;border:1px solid #ffd98a;}
+.s-done{background:#edfaf4;color:#1a8a52;border:1px solid #b8ebd1;}
+.s-montage{background:#f0e6fb;color:#6b21a8;border:1px solid #d8b4fe;}
+.s-production{background:#fef9c3;color:#854d0e;border:1px solid #fde047;}
+.s-live{background:#fff0f0;color:var(--red);border:1px solid #ffcdd0;}
+.s-livre{background:#edfaf4;color:#1a8a52;border:1px solid #b8ebd1;}
+.ch-pill{display:inline-block;font-size:10px;font-weight:500;padding:1px 6px;border-radius:3px;margin:1px 2px 1px 0;background:var(--beige);color:#8a4030;border:1px solid #e8c4b8;}
+.ch-pill.li{background:#e8f4fd;color:#005885;border-color:#b3d9f0;}
+.sub-nav{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.sub-btn{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:6px 16px;border:1px solid var(--border);border-radius:20px;background:white;color:var(--mid);cursor:pointer;transition:all .15s;}
+.sub-btn:hover{border-color:var(--red);color:var(--red);}
+.sub-btn.active{background:var(--red);color:white;border-color:var(--red);}
+.subview{display:none;}
+.subview.active{display:block;}
+.gantt-wrap{overflow-x:auto;}
+.gantt{min-width:700px;}
+.g-header{display:grid;grid-template-columns:190px repeat(6,1fr);font-size:10px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:4px;}
+.g-header span{text-align:center;}
+.g-row{display:grid;grid-template-columns:190px repeat(6,1fr);align-items:center;min-height:42px;border-bottom:1px solid var(--border);}
+.g-row:last-child{border-bottom:none;}
+.g-label{font-size:12px;font-weight:500;padding:4px 10px 4px 0;line-height:1.35;}
+.g-label span{display:block;font-size:10px;color:var(--mid);font-weight:400;margin-top:2px;}
+.g-cell{position:relative;height:42px;grid-column:2/span 6;}
+.g-bar{position:absolute;top:50%;transform:translateY(-50%);height:18px;border-radius:4px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:600;white-space:nowrap;overflow:hidden;}
+.g-today{position:absolute;top:0;bottom:0;width:2px;background:var(--red);z-index:2;}
+.g-today::after{content:'▼';position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--red);}
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:start;}
+.col-head{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding-bottom:8px;margin-bottom:8px;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.col-count{font-size:10px;background:var(--light);border-radius:10px;padding:1px 6px;color:var(--mid);}
+.k-card{background:white;border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:8px;cursor:pointer;transition:border-color .15s,transform .1s;}
+.k-card:hover{border-color:var(--red);transform:translateY(-1px);}
+.k-phase{font-size:9px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;}
+.k-title{font-size:12px;font-weight:500;margin-bottom:5px;line-height:1.4;}
+.k-meta{font-size:11px;color:var(--mid);}
+.k-dl{font-size:10px;color:var(--mid);margin-top:4px;}
+.filters{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;}
+.filters select{font-family:'DM Sans',sans-serif;font-size:12px;padding:6px 12px;border:1px solid var(--border);border-radius:20px;background:white;color:var(--dark);cursor:pointer;outline:none;}
+.filters select:focus{border-color:var(--red);}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{font-size:10px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:0 10px 10px 0;border-bottom:1px solid var(--border);}
+td{padding:10px 10px 10px 0;border-bottom:1px solid var(--border);color:var(--dark);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+.row-link{cursor:pointer;}
+.row-link:hover td{background:#fdf7f5;}
+.liv-card{background:white;border:1px solid var(--border);border-radius:10px;padding:1rem 1.4rem;margin-bottom:10px;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;transition:border-color .15s,transform .1s;}
+.liv-card:hover{border-color:var(--red);transform:translateY(-1px);}
+.liv-phase-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;}
+.liv-title{font-size:14px;font-weight:500;margin-bottom:6px;}
+.liv-meta{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--mid);align-items:center;}
+.liv-arrow{font-size:20px;color:var(--border);align-self:center;flex-shrink:0;}
+.liv-card:hover .liv-arrow{color:var(--red);}
+.det-back{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:7px 16px;border:1px solid var(--border);border-radius:20px;background:white;color:var(--mid);cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-bottom:1.5rem;transition:all .15s;}
+.det-back:hover{border-color:var(--red);color:var(--red);}
+.det-hero{border-radius:10px;padding:1.5rem;margin-bottom:1.25rem;color:white;}
+.det-phase-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;opacity:.75;margin-bottom:6px;}
+.det-title{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:10px;}
+.det-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem;}
+.det-field{background:white;border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;}
+.det-field-label{font-size:10px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.det-field-val{font-size:13px;font-weight:500;}
+.det-section{margin-bottom:1rem;}
+.det-stitle{font-size:10px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
+.det-card{background:white;border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;font-size:13px;line-height:1.7;}
+.budget-breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-top:8px;}
+.bb-item{background:var(--light);border-radius:6px;padding:8px 10px;text-align:center;}
+.bb-label{font-size:10px;color:var(--mid);margin-bottom:3px;font-weight:500;}
+.bb-amount{font-size:14px;font-weight:600;color:var(--dark);}
+.bb-total{background:#fdf0fa;border:1px solid var(--red);}
+.bb-total .bb-label{color:var(--red);}
+.bb-total .bb-amount{color:var(--red);}
+.notes-area{width:100%;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--dark);background:transparent;border:none;resize:vertical;min-height:70px;line-height:1.6;outline:none;}
+.funnel-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:1.5rem;}
+.f-card{border-radius:10px;padding:1.1rem 1.25rem;border:1px solid transparent;}
+.f-tofu{background:#fff0eb;border-color:#ffd0be;}
+.f-mofu{background:#fff8ec;border-color:#ffd98a;}
+.f-bofu{background:#edfaf4;border-color:#b8ebd1;}
+.f-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
+.f-tofu .f-label{color:var(--orange);}
+.f-mofu .f-label{color:#d4730a;}
+.f-bofu .f-label{color:#1a8a52;}
+.f-amount{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:4px;}
+.f-tofu .f-amount{color:#c44200;}
+.f-mofu .f-amount{color:#8a5800;}
+.f-bofu .f-amount{color:#0e5c35;}
+.f-detail{font-size:11px;line-height:1.6;color:var(--mid);}
+.bud-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);}
+.bud-row:last-child{border-bottom:none;}
+.bud-name{width:180px;font-weight:500;font-size:13px;}
+.bud-outer{flex:1;background:var(--light);border-radius:4px;height:7px;overflow:hidden;}
+.bud-inner{height:100%;border-radius:4px;}
+.bud-amount{width:110px;text-align:right;font-size:12px;color:var(--mid);}
+.phase-budget-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem;}
+.pb-card{background:white;border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;}
+.pb-phase{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.pb-amount{font-family:'DM Serif Display',serif;font-size:20px;color:var(--dark);margin-bottom:2px;}
+.pb-grants{font-size:11px;color:var(--mid);}
+.split-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:1rem;}
+.split-table th{font-size:10px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;text-align:right;padding:0 8px 8px 0;border-bottom:1px solid var(--border);}
+.split-table th:first-child{text-align:left;}
+.split-table td{padding:7px 8px 7px 0;border-bottom:1px solid var(--border);text-align:right;font-size:12px;}
+.split-table td:first-child{text-align:left;font-weight:500;}
+.split-table tr:last-child td{border-bottom:none;font-weight:600;}
+.split-table .total-row td{background:var(--light);font-weight:700;}
+.footer{text-align:center;padding:2rem;font-size:11px;color:var(--mid);border-top:1px solid var(--border);margin-top:2rem;}
+.footer span{color:var(--red);font-weight:600;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo-name">Caritas International</div>
+  <div class="header-tag">Always On 2026</div>
+</header>
+
+<nav class="top-nav">
+  <button class="top-btn active" onclick="switchSection('overview',this)">Vue d'ensemble</button>
+  <button class="top-btn" onclick="switchSection('phases',this)">Phases</button>
+  <button class="top-btn" onclick="switchSection('planning',this)">Planning</button>
+  <button class="top-btn" onclick="switchSection('livrables',this)">Livrables</button>
+  <button class="top-btn" onclick="switchSection('budget',this)">Budget</button>
+</nav>
+
+<main class="content">
+
+<!-- OVERVIEW -->
+<div id="sec-overview" class="section active">
+  <div class="page-title">
+    <h1>Always On 2026</h1>
+    <p>Fil rouge narratif · 6 phases · 27 livrables · Budget 72 000€ + 120 000€ Google Grants</p>
+  </div>
+  <div class="metric-grid">
+    <div class="metric m-red"><div class="metric-label">Budget activable</div><div class="metric-value">72 000€</div><div class="metric-sub">+ 8k€ réserve</div></div>
+    <div class="metric m-orange"><div class="metric-label">Google Grants</div><div class="metric-value">120 000€</div><div class="metric-sub">Full-funnel gratuit</div></div>
+    <div class="metric m-pink"><div class="metric-label">Livrables</div><div class="metric-value">27</div><div class="metric-sub">1 livré · 1 live · 6 en montage · 19 planifiés</div></div>
+    <div class="metric m-beige"><div class="metric-label">ROI cible</div><div class="metric-value">&gt; 3:1</div><div class="metric-sub">4 canaux actifs</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Fil rouge narratif</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fff0eb;border-radius:8px;border:1px solid #ff582322;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#ff5823;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">1</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#a03500;">Mission & Identité</div><div style="font-size:11px;color:#a03500;opacity:.8;">Présenter Caritas · 4 livrables · 5 semaines</div></div>
+        <div style="font-size:11px;color:#a03500;opacity:.7;">08/07 → 09/08</div>
+        <span style="font-size:11px;font-weight:600;background:#ff5823;color:white;padding:2px 10px;border-radius:20px;">8 000€</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fcebeb;border-radius:8px;border:1px solid #e2081722;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#e20817;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">2</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#8a0010;">L'Urgence</div><div style="font-size:11px;color:#8a0010;opacity:.8;">Urgences humanitaires · 4 livrables · 5 semaines</div></div>
+        <div style="font-size:11px;color:#8a0010;opacity:.7;">10/08 → 13/09</div>
+        <span style="font-size:11px;font-weight:600;background:#e20817;color:white;padding:2px 10px;border-radius:20px;">14 000€</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fdf0fa;border-radius:8px;border:1px solid #ff21a622;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#ff21a6;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">3</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#8a0060;">Migration</div><div style="font-size:11px;color:#8a0060;opacity:.8;">Conséquences de l'urgence · 6 livrables · 5 semaines</div></div>
+        <div style="font-size:11px;color:#8a0060;opacity:.7;">14/09 → 18/10</div>
+        <span style="font-size:11px;font-weight:600;background:#ff21a6;color:white;padding:2px 10px;border-radius:20px;">12 000€</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fdf7f5;border-radius:8px;border:1px solid #c8906e22;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#c8906e;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">3b</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#6b4030;">Mission & Identité (rappel)</div><div style="font-size:11px;color:#6b4030;opacity:.8;">Rappel à mi-parcours · 3 livrables · 3 semaines</div></div>
+        <div style="font-size:11px;color:#6b4030;opacity:.7;">19/10 → 08/11</div>
+        <span style="font-size:11px;font-weight:600;background:#c8906e;color:white;padding:2px 10px;border-radius:20px;">6 000€</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#f3f3f3;border-radius:8px;border:1px solid #88888822;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#888;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">4</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#444;">Coopération & Développement</div><div style="font-size:11px;color:#444;opacity:.8;">Ce que Caritas fait sur le terrain · 5 livrables · 4 semaines</div></div>
+        <div style="font-size:11px;color:#444;opacity:.7;">09/11 → 06/12</div>
+        <span style="font-size:11px;font-weight:600;background:#888;color:white;padding:2px 10px;border-radius:20px;">10 000€</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#edfaf4;border-radius:8px;border:1px solid #1a8a5222;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#1a8a52;color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">5</div>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#0e5c35;">Conversion — Full dons</div><div style="font-size:11px;color:#0e5c35;opacity:.8;">3,5 semaines de conversion pure · 5 livrables</div></div>
+        <div style="font-size:11px;color:#0e5c35;opacity:.7;">07/12 → 31/12</div>
+        <span style="font-size:11px;font-weight:600;background:#1a8a52;color:white;padding:2px 10px;border-radius:20px;">22 000€</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASES -->
+<div id="sec-phases" class="section">
+  <div class="page-title"><h1>Phases</h1><p>6 phases narratives · Juillet → Décembre 2026</p></div>
+  <div id="phases-content"></div>
+</div>
+
+<!-- PLANNING -->
+<div id="sec-planning" class="section">
+  <div class="page-title"><h1>Planning</h1><p>Juillet → Décembre 2026</p></div>
+  <div class="sub-nav">
+    <button class="sub-btn active" onclick="switchSub('gantt',this)">Gantt</button>
+    <button class="sub-btn" onclick="switchSub('kanban',this)">Kanban</button>
+    <button class="sub-btn" onclick="switchSub('tableau',this)">Tableau</button>
+  </div>
+  <div id="sub-gantt" class="subview active"><div class="card" id="gantt-card"></div></div>
+  <div id="sub-kanban" class="subview"><div id="kanban-content"></div></div>
+  <div id="sub-tableau" class="subview">
+    <div class="filters">
+      <select id="ft-phase" onchange="filterTab()"><option value="">Toutes phases</option></select>
+      <select id="ft-statut" onchange="filterTab()"><option value="">Tous statuts</option><option>livré</option><option>live</option><option>en montage</option><option>planifié</option><option>À définir</option></select>
+      <select id="ft-canal" onchange="filterTab()"><option value="">Tous canaux</option><option>META</option><option>YouTube</option><option>LinkedIn</option><option>Search</option><option>Grants</option></select>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden;"><table><thead><tr>
+      <th style="padding-left:1.5rem;width:80px;">Phase</th>
+      <th>Titre</th>
+      <th style="width:160px;">Canaux</th>
+      <th style="width:90px;">Responsable</th>
+      <th style="width:90px;">Mise en ligne</th>
+      <th style="width:85px;">Statut</th>
+    </tr></thead><tbody id="tab-body"></tbody></table></div>
+  </div>
+</div>
+
+<!-- LIVRABLES -->
+<div id="sec-livrables" class="section">
+  <div id="liv-list">
+    <div class="page-title"><h1>Livrables</h1><p>27 contenus · Cliquer pour le détail complet</p></div>
+    <div class="filters">
+      <select id="lf-phase" onchange="filterLiv()"><option value="">Toutes phases</option></select>
+      <select id="lf-statut" onchange="filterLiv()"><option value="">Tous statuts</option><option>livré</option><option>live</option><option>en montage</option><option>planifié</option><option>À définir</option></select>
+      <select id="lf-canal" onchange="filterLiv()"><option value="">Tous canaux</option><option>META</option><option>YouTube</option><option>LinkedIn</option><option>Search</option><option>Grants</option></select>
+    </div>
+    <div id="liv-cards"></div>
+  </div>
+  <div id="liv-detail" style="display:none;"></div>
+</div>
+
+<!-- BUDGET -->
+<div id="sec-budget" class="section">
+  <div class="page-title"><h1>Budget & Funnel</h1><p>72 000€ activables + 120 000€ Google Grants · 4 canaux</p></div>
+  <div class="funnel-grid">
+    <div class="f-card f-tofu"><div class="f-label">TOFU — Awareness</div><div class="f-amount">35 000€</div><div class="f-detail">49% · YT, META, LinkedIn<br>2M+ personnes · CPM &lt; 8€</div></div>
+    <div class="f-card f-mofu"><div class="f-label">MOFU — Considération</div><div class="f-amount">15 000€</div><div class="f-detail">21% · META, LinkedIn<br>Retargeting audiences chauffées</div></div>
+    <div class="f-card f-bofu"><div class="f-label">BOFU — Conversion</div><div class="f-amount">22 000€</div><div class="f-detail">31% · META, Search, LinkedIn<br>+ 120k€ Grants · CPA &lt; 80€</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Répartition par canal</div>
+    <div class="bud-row"><span class="bud-name">Meta (FB + IG)</span><div class="bud-outer"><div class="bud-inner" style="width:61%;background:#e20817;"></div></div><span class="bud-amount">44 000€ · 61%</span></div>
+    <div class="bud-row"><span class="bud-name">YouTube</span><div class="bud-outer"><div class="bud-inner" style="width:28%;background:#ff5823;"></div></div><span class="bud-amount">20 000€ · 28%</span></div>
+    <div class="bud-row"><span class="bud-name">LinkedIn</span><div class="bud-outer"><div class="bud-inner" style="width:8%;background:#0077b5;"></div></div><span class="bud-amount">6 000€ · 8%</span></div>
+    <div class="bud-row"><span class="bud-name">Google Search</span><div class="bud-outer"><div class="bud-inner" style="width:3%;background:#888;"></div></div><span class="bud-amount">2 000€ · 3%</span></div>
+    <div class="bud-row" style="background:var(--light);border-radius:6px;padding:8px 10px;margin-top:8px;"><span class="bud-name" style="color:var(--mid);font-weight:400;">Google Grants (hors split)</span><div class="bud-outer"><div class="bud-inner" style="width:100%;background:#b8ebd1;"></div></div><span class="bud-amount" style="color:#1a8a52;font-weight:600;">120 000€ gratuit</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Split par canal et par phase</div>
+    <table class="split-table">
+      <thead><tr>
+        <th>Phase</th><th>META</th><th>YouTube</th><th>LinkedIn</th><th>Search</th><th>Total</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>1. Mission & Identité</td><td>4 800€</td><td>2 400€</td><td>800€</td><td>–</td><td>8 000€</td></tr>
+        <tr><td>2. L'Urgence</td><td>9 000€</td><td>4 500€</td><td>–</td><td>500€</td><td>14 000€</td></tr>
+        <tr><td>3. Migration</td><td>6 500€</td><td>4 500€</td><td>1 000€</td><td>–</td><td>12 000€</td></tr>
+        <tr><td>3b. Identité rappel</td><td>3 200€</td><td>1 800€</td><td>1 000€</td><td>–</td><td>6 000€</td></tr>
+        <tr><td>4. Coopération & Dév.</td><td>5 500€</td><td>3 300€</td><td>1 200€</td><td>–</td><td>10 000€</td></tr>
+        <tr><td>5. Conversion</td><td>15 000€</td><td>3 500€</td><td>2 000€</td><td>1 500€</td><td>22 000€</td></tr>
+        <tr class="total-row"><td>TOTAL</td><td>44 000€</td><td>20 000€</td><td>6 000€</td><td>2 000€</td><td>72 000€</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title">Budget par phase</div>
+    <div class="phase-budget-grid">
+      <div class="pb-card"><div class="pb-phase" style="color:#ff5823;">Phase 1 — Mission & Identité</div><div class="pb-amount">8 000€</div><div class="pb-grants">+ 10 000€ Grants</div></div>
+      <div class="pb-card"><div class="pb-phase" style="color:#e20817;">Phase 2 — L'Urgence</div><div class="pb-amount">14 000€</div><div class="pb-grants">+ 25 000€ Grants</div></div>
+      <div class="pb-card"><div class="pb-phase" style="color:#ff21a6;">Phase 3 — Migration</div><div class="pb-amount">12 000€</div><div class="pb-grants">+ 20 000€ Grants</div></div>
+      <div class="pb-card"><div class="pb-phase" style="color:#c8906e;">Phase 3bis — Identité rappel</div><div class="pb-amount">6 000€</div><div class="pb-grants">+ 10 000€ Grants</div></div>
+      <div class="pb-card"><div class="pb-phase" style="color:#888;">Phase 4 — Coopération</div><div class="pb-amount">10 000€</div><div class="pb-grants">+ 15 000€ Grants</div></div>
+      <div class="pb-card"><div class="pb-phase" style="color:#1a8a52;">Phase 5 — Conversion</div><div class="pb-amount">22 000€</div><div class="pb-grants">+ 40 000€ Grants</div></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="footer">
+  <span>Caritas International Belgique</span> · Dashboard Always On 2026 · Humanity is Unstoppable
+</footer>
+
+<script>
+const PHASES = {
+  phase1:    {label:'Phase 1 — Mission & Identité',  short:'P1',  bar:'#ff5823',bg:'#fff0eb',text:'#a03500',debut:'08/07/2026',fin:'09/08/2026'},
+  phase2:    {label:"Phase 2 — L'Urgence",           short:'P2',  bar:'#e20817',bg:'#fcebeb',text:'#8a0010',debut:'10/08/2026',fin:'13/09/2026'},
+  phase3:    {label:'Phase 3 — Migration',            short:'P3',  bar:'#ff21a6',bg:'#fdf0fa',text:'#8a0060',debut:'14/09/2026',fin:'18/10/2026'},
+  phase3bis: {label:'Phase 3bis — Identité (rappel)',short:'P3b', bar:'#c8906e',bg:'#fdf7f5',text:'#6b4030',debut:'19/10/2026',fin:'08/11/2026'},
+  phase4:    {label:'Phase 4 — Coopération & Dev.',  short:'P4',  bar:'#888888',bg:'#f3f3f3',text:'#444',   debut:'09/11/2026',fin:'06/12/2026'},
+  phase5:    {label:'Phase 5 — Conversion',           short:'P5',  bar:'#1a8a52',bg:'#edfaf4',text:'#0e5c35',debut:'07/12/2026',fin:'31/12/2026'},
+};
+
+const STATUT_CLASS = {
+  'livré':'s-livre','live':'s-live','en cours':'s-encours','planifié':'s-planifie',
+  'à définir en fonction du sujet':'s-adefinir','en montage':'s-montage','en production':'s-production'
+};
+
+const LP_URL = 'https://caritasinternational.sharepoint.com/:x:/r/sites/Dep.COMMOB/Documents%20partages/Com%20Int-Ext/2.%20Online%20external/Digital%20Marketing/02.%20Strategy%20%26%20Dashboards/STRATEGY/STRATEGIE%20DIGITAL%20MARKETING/ALWAYS%20ON/ALWAYS-ON_URLS.xlsx?d=w375688780934415d912fe4b8023c397b&csf=1&web=1&e=5ifxWr';
+
 const LIVRABLES = [
   // PHASE 1 — Mission & Identité
-  {id:'p1-v1',phase:'phase1',titre:'Réseau mondial',statut:'livré',canaux:'META, YouTube, Grants',responsable:'Maude',ligne:'08/07/2026',funnel:'TOFU',
+  {id:'p1-v1',phase:'phase1',titre:`Réseau mondial`,statut:'livré',canaux:'META, YouTube, Grants',responsable:`Maude`,ligne:'08/07/2026',funnel:'TOFU',
    budget_meta:'1 300€',budget_yt:'800€',budget_li:'–',budget_search:'–',budget_total:'2 100€',
-   objectif:'Montrer que Caritas est un réseau de 162 organisations présentes dans 200 pays. Créer un sentiment d'ampleur et de légitimité. Le spectateur doit se dire "ils sont vraiment partout, ils savent ce qu'ils font".',
-   formats:'META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · Stories 1080x1920px · In-stream 1280x720px|YouTube : Skippable 1920x1080px · Shorts 1080x1920px',notes:''},
-  {id:'p1-v2',phase:'phase1',titre:'Qui sommes-nous ? (une personne = un projet)',statut:'live',canaux:'META, YouTube, Grants',responsable:'Maude',ligne:'08/07/2026',funnel:'TOFU',
+   objectif:`Montrer que Caritas est un réseau de 162 organisations présentes dans 200 pays. Créer un sentiment d'ampleur et de légitimité. Le spectateur doit se dire "ils sont vraiment partout, ils savent ce qu'ils font".`,
+   formats:`META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · Stories 1080x1920px · In-stream 1280x720px|YouTube : Skippable 1920x1080px · Shorts 1080x1920px`,notes:``},
+  {id:'p1-v2',phase:'phase1',titre:`Qui sommes-nous ? (une personne = un projet)`,statut:'live',canaux:'META, YouTube, Grants',responsable:`Maude`,ligne:'08/07/2026',funnel:'TOFU',
    budget_meta:'1 300€',budget_yt:'800€',budget_li:'–',budget_search:'–',budget_total:'2 100€',
-   objectif:'Humaniser Caritas en cassant l'image d'institution abstraite. On suit une personne réelle et ce que Caritas a changé dans sa trajectoire. Objectif : identification émotionnelle.',
-   formats:'META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · Stories 1080x1920px · In-stream 1280x720px|YouTube : Skippable 1920x1080px · Shorts 1080x1920px',notes:''},
-  {id:'p1-v3',phase:'phase1',titre:'Valeur (1 vidéo)',statut:'en montage',canaux:'META, LinkedIn, Grants',responsable:'Maude',ligne:'08/07/2026',funnel:'TOFU',
+   objectif:`Humaniser Caritas en cassant l'image d'institution abstraite. On suit une personne réelle et ce que Caritas a changé dans sa trajectoire. Objectif : identification émotionnelle.`,
+   formats:`META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · Stories 1080x1920px · In-stream 1280x720px|YouTube : Skippable 1920x1080px · Shorts 1080x1920px`,notes:``},
+  {id:'p1-v3',phase:'phase1',titre:`Valeur (1 vidéo)`,statut:'en montage',canaux:'META, LinkedIn, Grants',responsable:`Maude`,ligne:'08/07/2026',funnel:'TOFU',
    budget_meta:'1 200€',budget_yt:'–',budget_li:'400€',budget_search:'–',budget_total:'1 600€',
-   objectif:'Un collaborateur explique comment il applique une valeur Caritas dans son travail quotidien. Une situation réelle, un geste, une décision. Renforcer la fierté d'appartenance ET montrer que les valeurs sont vécues, pas affichées.',
-   formats:'META : Reels 1080x1920px · Stories 1080x1920px · Feed 1080x1350px|LinkedIn : Vidéo sponsorisée 1920x1080px · 1080x1080px',notes:''},
-  {id:'p1-v4',phase:'phase1',titre:'Projet (1 vidéo)',statut:'en montage',canaux:'META, YouTube, LinkedIn, Grants',responsable:'Maude',ligne:'08/07/2026',funnel:'TOFU',
+   objectif:`Un collaborateur explique comment il applique une valeur Caritas dans son travail quotidien. Une situation réelle, un geste, une décision. Renforcer la fierté d'appartenance ET montrer que les valeurs sont vécues, pas affichées.`,
+   formats:`META : Reels 1080x1920px · Stories 1080x1920px · Feed 1080x1350px|LinkedIn : Vidéo sponsorisée 1920x1080px · 1080x1080px`,notes:``},
+  {id:'p1-v4',phase:'phase1',titre:`Projet (1 vidéo)`,statut:'en montage',canaux:'META, YouTube, LinkedIn, Grants',responsable:`Maude`,ligne:'08/07/2026',funnel:'TOFU',
    budget_meta:'1 000€',budget_yt:'800€',budget_li:'400€',budget_search:'–',budget_total:'2 200€',
-   objectif:'Présenter un projet Caritas concret — une personne, un projet, un endroit dans le monde. Incarner la mission via une réalisation tangible.',
-   formats:'META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px|YouTube : Skippable 1920x1080px|LinkedIn : Vidéo sponsorisée 1920x1080px',notes:''},
+   objectif:`Présenter un projet Caritas concret — une personne, un projet, un endroit dans le monde. Incarner la mission via une réalisation tangible.`,
+   formats:`META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px|YouTube : Skippable 1920x1080px|LinkedIn : Vidéo sponsorisée 1920x1080px`,notes:``},
 
   // PHASE 2 — L'Urgence
-  {id:'p2-c1',phase:'phase2',titre:"C'est quoi une urgence ?",statut:'en montage',canaux:'META, YouTube, Grants',responsable:'—',ligne:'10/08/2026',funnel:'TOFU',
+  {id:'p2-c1',phase:'phase2',titre:"C'est quoi une urgence ?",statut:'en montage',canaux:'META, YouTube, Grants',responsable:`—`,ligne:'10/08/2026',funnel:'TOFU',
    budget_meta:'2 000€',budget_yt:'1 200€',budget_li:'–',budget_search:'–',budget_total:'3 200€',
-   objectif:'Expliquer simplement et sans jargon ce que signifie "urgence humanitaire". Créer le contexte nécessaire pour que tout ce qui suit dans la phase ait du sens. Sans ce socle, le public ne comprend pas pourquoi Caritas intervient.',
-   formats:'META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · In-stream 1280x720px|YouTube : Skippable 1920x1080px · Shorts 1080x1920px',notes:''},
-  {id:'p2-c2',phase:'phase2',titre:'Que fait Caritas en cas d'urgence ?',statut:'en montage',canaux:'META, YouTube, Grants',responsable:'—',ligne:'10/08/2026',funnel:'TOFU + MOFU',
+   objectif:`Expliquer simplement et sans jargon ce que signifie "urgence humanitaire". Créer le contexte nécessaire pour que tout ce qui suit dans la phase ait du sens. Sans ce socle, le public ne comprend pas pourquoi Caritas intervient.`,
+   formats:`META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · In-stream 1280x720px|YouTube : Skippable 1920x1080px · Shorts 1080x1920px`,notes:``},
+  {id:'p2-c2',phase:'phase2',titre:`Que fait Caritas en cas d'urgence ?`,statut:'en montage',canaux:'META, YouTube, Grants',responsable:`—`,ligne:'10/08/2026',funnel:'TOFU + MOFU',
    budget_meta:'2 000€',budget_yt:'1 200€',budget_li:'–',budget_search:'–',budget_total:'3 200€',
-   objectif:'Répondre à "concrètement, quand il y a une crise, vous faites quoi ?" Rendre l'action de Caritas tangible — pas "nous aidons les victimes" mais "voici ce qu'on fait dans les 48h qui suivent une crise".',
-   formats:'META : Feed 1080x1080px · 1080x1350px · In-stream 1280x720px|YouTube : Skippable 1920x1080px',notes:''},
-  {id:'p2-c3',phase:'phase2',titre:'Focus Moyen-Orient',statut:'en montage',canaux:'META, YouTube, Grants',responsable:'—',ligne:'10/08/2026',funnel:'TOFU + MOFU',
+   objectif:`Répondre à "concrètement, quand il y a une crise, vous faites quoi ?" Rendre l'action de Caritas tangible — pas "nous aidons les victimes" mais "voici ce qu'on fait dans les 48h qui suivent une crise".`,
+   formats:`META : Feed 1080x1080px · 1080x1350px · In-stream 1280x720px|YouTube : Skippable 1920x1080px`,notes:``},
+  {id:'p2-c3',phase:'phase2',titre:`Focus Moyen-Orient`,statut:'en montage',canaux:'META, YouTube, Grants',responsable:`—`,ligne:'10/08/2026',funnel:'TOFU + MOFU',
    budget_meta:'1 800€',budget_yt:'1 000€',budget_li:'–',budget_search:'–',budget_total:'2 800€',
-   objectif:'Zoom sur la crise au Moyen-Orient. Créer un pont entre "j'en entends parler aux infos" et "Caritas est là-bas, concrètement". Renforcer la crédibilité et la pertinence dans l'actualité.',
-   formats:'META : Feed 1080x1080px · 1080x1350px · In-stream 1280x720px|YouTube : Skippable 1920x1080px',notes:''},
-  {id:'p2-c4',phase:'phase2',titre:'Focus Ukraine',statut:'en montage',canaux:'META, YouTube, Grants',responsable:'—',ligne:'10/08/2026',funnel:'TOFU + MOFU',
+   objectif:`Zoom sur la crise au Moyen-Orient. Créer un pont entre "j'en entends parler aux infos" et "Caritas est là-bas, concrètement". Renforcer la crédibilité et la pertinence dans l'actualité.`,
+   formats:`META : Feed 1080x1080px · 1080x1350px · In-stream 1280x720px|YouTube : Skippable 1920x1080px`,notes:``},
+  {id:'p2-c4',phase:'phase2',titre:`Focus Ukraine`,statut:'en montage',canaux:'META, YouTube, Grants',responsable:`—`,ligne:'10/08/2026',funnel:'TOFU + MOFU',
    budget_meta:'1 800€',budget_yt:'1 000€',budget_li:'–',budget_search:'–',budget_total:'2 800€',
-   objectif:'Zoom sur la crise ukrainienne. Montrer la présence et l'action concrète de Caritas. Audience belge sensibilisée à ce conflit depuis 2022.',
-   formats:'META : Feed 1080x1080px · 1080x1350px · In-stream 1280x720px|YouTube : Skippable 1920x1080px',notes:''},
-  {id:'p2-c5',phase:'phase2',titre:'Plaidoyer — Droit International',statut:'planifié',canaux:'YouTube, Search, Grants',responsable:'—',ligne:'10/08/2026',funnel:'MOFU',
+   objectif:`Zoom sur la crise ukrainienne. Montrer la présence et l'action concrète de Caritas. Audience belge sensibilisée à ce conflit depuis 2022.`,
+   formats:`META : Feed 1080x1080px · 1080x1350px · In-stream 1280x720px|YouTube : Skippable 1920x1080px`,notes:``},
+  {id:'p2-c5',phase:'phase2',titre:`Plaidoyer — Droit International`,statut:'planifié',canaux:'YouTube, Search, Grants',responsable:`—`,ligne:'10/08/2026',funnel:'MOFU',
    budget_meta:'–',budget_yt:'1 000€',budget_li:'–',budget_search:'1 000€',budget_total:'2 000€',
-   objectif:'Positionner Caritas comme voix experte dans le débat public sur les droits humains et le droit international humanitaire. Objectif : légitimité institutionnelle auprès des médias, décideurs politiques et partenaires.',
-   formats:'YouTube : Skippable 1920x1080px · Shorts 1080x1920px|Search : Format texte · 15 titres 30 car. · 4 descriptions 90 car.',notes:''},
+   objectif:`Positionner Caritas comme voix experte dans le débat public sur les droits humains et le droit international humanitaire. Objectif : légitimité institutionnelle auprès des médias, décideurs politiques et partenaires.`,
+   formats:`YouTube : Skippable 1920x1080px · Shorts 1080x1920px|Search : Format texte · 15 titres 30 car. · 4 descriptions 90 car.`,notes:``},
 
   // PHASE 3 — Migration
-  {id:'p3-c1',phase:'phase3',titre:'Ce qui pousse à partir — cas concret',statut:'planifié',canaux:'META, YouTube, Grants',responsable:'—',ligne:'14/09/2026',funnel:'TOFU',
+  {id:'p3-c1',phase:'phase3',titre:`Ce qui pousse à partir — cas concret`,statut:'planifié',canaux:'META, YouTube, Grants',responsable:`—`,ligne:'14/09/2026',funnel:'TOFU',
    budget_meta:'1 500€',budget_yt:'800€',budget_li:'–',budget_search:'–',budget_total:'2 300€',
-   objectif:'Mettre un visage et une histoire sur la notion abstraite de "personne déplacée". Provoquer l'empathie sans misérabilisme — on montre la décision humaine de partir, ce qu'elle coûte, ce qu'elle espère.',
-   formats:'META : Reels 1080x1920px · Stories 1080x1920px · Feed 1080x1350px|YouTube : Skippable 1920x1080px · Shorts 1080x1920px',notes:'Déplacé de Phase 2 → Phase 3'},
-  {id:'p3-c2',phase:'phase3',titre:'WIMS — l'outil',statut:'planifié',canaux:'META, YouTube, Grants',responsable:'—',ligne:'14/09/2026',funnel:'MOFU',
+   objectif:`Mettre un visage et une histoire sur la notion abstraite de "personne déplacée". Provoquer l'empathie sans misérabilisme — on montre la décision humaine de partir, ce qu'elle coûte, ce qu'elle espère.`,
+   formats:`META : Reels 1080x1920px · Stories 1080x1920px · Feed 1080x1350px|YouTube : Skippable 1920x1080px · Shorts 1080x1920px`,notes:`Déplacé de Phase 2 → Phase 3`},
+  {id:'p3-c2',phase:'phase3',titre:`WIMS — l'outil`,statut:'planifié',canaux:'META, YouTube, Grants',responsable:`—`,ligne:'14/09/2026',funnel:'MOFU',
    budget_meta:'1 500€',budget_yt:'800€',budget_li:'–',budget_search:'–',budget_total:'2 300€',
-   objectif:'Donner envie à un maximum de personnes d'utiliser WIMS — un outil de sensibilisation à la migration accessible à tous. Le contenu montre ce que l'outil fait vivre, les décisions à prendre, les conséquences. Objectif : provoquer la curiosité et pousser à l'action.',
-   formats:'META : Carrousel 1080x1080px · Reels 1080x1920px · Stories 1080x1920px|YouTube : Skippable 1920x1080px · Shorts 1080x1920px',notes:''},
-  {id:'p3-c3',phase:'phase3',titre:'BruZelle',statut:'planifié',canaux:'META, YouTube, Grants',responsable:'Céline',ligne:'14/09/2026',funnel:'TOFU + MOFU',
+   objectif:`Donner envie à un maximum de personnes d'utiliser WIMS — un outil de sensibilisation à la migration accessible à tous. Le contenu montre ce que l'outil fait vivre, les décisions à prendre, les conséquences. Objectif : provoquer la curiosité et pousser à l'action.`,
+   formats:`META : Carrousel 1080x1080px · Reels 1080x1920px · Stories 1080x1920px|YouTube : Skippable 1920x1080px · Shorts 1080x1920px`,notes:``},
+  {id:'p3-c3',phase:'phase3',titre:`BruZelle`,statut:'planifié',canaux:'META, YouTube, Grants',responsable:`Céline`,ligne:'14/09/2026',funnel:'TOFU + MOFU',
    budget_meta:'1 500€',budget_yt:'800€',budget_li:'–',budget_search:'–',budget_total:'2 300€',
-   objectif:'Rendre visible ce qui reste habituellement invisible. Le public belge passe devant ces endroits sans savoir ce qui s'y passe. Objectif : ouvrir la porte, montrer les gens, les histoires, la réalité quotidienne.',
-   formats:'META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · In-stream 1280x720px|YouTube : Skippable 1920x1080px',notes:''},
-  {id:'p3-c4',phase:'phase3',titre:'Le jeu des chaises',statut:'planifié',canaux:'META, YouTube, Grants',responsable:'—',ligne:'14/09/2026',funnel:'TOFU',
+   objectif:`Rendre visible ce qui reste habituellement invisible. Le public belge passe devant ces endroits sans savoir ce qui s'y passe. Objectif : ouvrir la porte, montrer les gens, les histoires, la réalité quotidienne.`,
+   formats:`META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · In-stream 1280x720px|YouTube : Skippable 1920x1080px`,notes:``},
+  {id:'p3-c4',phase:'phase3',titre:`Le jeu des chaises`,statut:'planifié',canaux:'META, YouTube, Grants',responsable:`—`,ligne:'14/09/2026',funnel:'TOFU',
    budget_meta:'1 200€',budget_yt:'700€',budget_li:'–',budget_search:'–',budget_total:'1 900€',
-   objectif:'Faire ressentir au public ce que vivent les personnes déplacées à travers un format participatif. Créer une expérience émotionnelle directe — pas "regardez leur souffrance" mais "ressentez ce que c'est de ne pas avoir de place". Conçu pour la viralité organique.',
-   formats:'META : Reels 1080x1920px · Stories 1080x1920px|YouTube : Shorts 1080x1920px · Skippable 1920x1080px',notes:''},
-  {id:'p3-c5',phase:'phase3',titre:'Louvranges',statut:'planifié',canaux:'META, YouTube, Grants',responsable:'—',ligne:'14/09/2026',funnel:'MOFU',
+   objectif:`Faire ressentir au public ce que vivent les personnes déplacées à travers un format participatif. Créer une expérience émotionnelle directe — pas "regardez leur souffrance" mais "ressentez ce que c'est de ne pas avoir de place". Conçu pour la viralité organique.`,
+   formats:`META : Reels 1080x1920px · Stories 1080x1920px|YouTube : Shorts 1080x1920px · Skippable 1920x1080px`,notes:``},
+  {id:'p3-c5',phase:'phase3',titre:`Louvranges`,statut:'planifié',canaux:'META, YouTube, Grants',responsable:`—`,ligne:'14/09/2026',funnel:'MOFU',
    budget_meta:'1 200€',budget_yt:'700€',budget_li:'–',budget_search:'–',budget_total:'1 900€',
-   objectif:'Montrer la réalité quotidienne du centre de Louvranges — l'accompagnement, les personnes, les travailleurs. Objectif : construire la proximité et la confiance. Louvranges c'est concret, c'est en Belgique, c'est maintenant.',
-   formats:'META : Feed 1080x1080px · 1080x1350px · In-stream 1280x720px|YouTube : Skippable 1920x1080px',notes:''},
-  {id:'p3-c6',phase:'phase3',titre:'Education — quelles sont les causes de la migration ?',statut:'planifié',canaux:'META, YouTube, Grants',responsable:'—',ligne:'14/09/2026',funnel:'TOFU',
+   objectif:`Montrer la réalité quotidienne du centre de Louvranges — l'accompagnement, les personnes, les travailleurs. Objectif : construire la proximité et la confiance. Louvranges c'est concret, c'est en Belgique, c'est maintenant.`,
+   formats:`META : Feed 1080x1080px · 1080x1350px · In-stream 1280x720px|YouTube : Skippable 1920x1080px`,notes:``},
+  {id:'p3-c6',phase:'phase3',titre:`Education — quelles sont les causes de la migration ?`,statut:'planifié',canaux:'META, YouTube, Grants',responsable:`—`,ligne:'14/09/2026',funnel:'TOFU',
    budget_meta:'800€',budget_yt:'500€',budget_li:'–',budget_search:'–',budget_total:'1 300€',
-   objectif:'Sensibiliser le public aux causes profondes de la migration — climatiques, économiques, politiques, conflictuelles. Format pédagogique accessible qui donne les clés de compréhension sans simplifier.',
-   formats:'META : Feed 1080x1080px · Reels 1080x1920px|YouTube : Shorts 1080x1920px · Skippable 1920x1080px',notes:''},
+   objectif:`Sensibiliser le public aux causes profondes de la migration — climatiques, économiques, politiques, conflictuelles. Format pédagogique accessible qui donne les clés de compréhension sans simplifier.`,
+   formats:`META : Feed 1080x1080px · Reels 1080x1920px|YouTube : Shorts 1080x1920px · Skippable 1920x1080px`,notes:``},
 
   // PHASE 3BIS — Identité rappel
-  {id:'p3b-v1',phase:'phase3bis',titre:'Réseau mondial (rappel)',statut:'planifié',canaux:'META, YouTube, Grants',responsable:'—',ligne:'19/10/2026',funnel:'TOFU',
+  {id:'p3b-v1',phase:'phase3bis',titre:`Réseau mondial (rappel)`,statut:'planifié',canaux:'META, YouTube, Grants',responsable:`—`,ligne:'19/10/2026',funnel:'TOFU',
    budget_meta:'1 200€',budget_yt:'800€',budget_li:'–',budget_search:'–',budget_total:'2 000€',
-   objectif:'Après 4 mois d'exposition à l'urgence et à la migration, le rappel d'identité a un effet différent. Objectif : récapituler — "vous savez ce qu'on fait, voici qui nous sommes et pourquoi vous pouvez nous faire confiance". Pont émotionnel vers la conversion.',
-   formats:'META : Reels 1080x1920px · Feed 1080x1350px|YouTube : Skippable 1920x1080px',notes:'Exclusion audiences déjà exposées Phase 1'},
-  {id:'p3b-v2',phase:'phase3bis',titre:'Qui sommes-nous (rappel)',statut:'planifié',canaux:'META, YouTube, Grants',responsable:'—',ligne:'19/10/2026',funnel:'TOFU',
+   objectif:`Après 4 mois d'exposition à l'urgence et à la migration, le rappel d'identité a un effet différent. Objectif : récapituler — "vous savez ce qu'on fait, voici qui nous sommes et pourquoi vous pouvez nous faire confiance". Pont émotionnel vers la conversion.`,
+   formats:`META : Reels 1080x1920px · Feed 1080x1350px|YouTube : Skippable 1920x1080px`,notes:`Exclusion audiences déjà exposées Phase 1`},
+  {id:'p3b-v2',phase:'phase3bis',titre:`Qui sommes-nous (rappel)`,statut:'planifié',canaux:'META, YouTube, Grants',responsable:`—`,ligne:'19/10/2026',funnel:'TOFU',
    budget_meta:'1 000€',budget_yt:'800€',budget_li:'–',budget_search:'–',budget_total:'1 800€',
-   objectif:'Rappel mission Caritas après les phases urgence/migration. La confiance est construite, on rappelle qui on est avant la conversion.',
-   formats:'META : Reels 1080x1920px · Feed 1080x1350px|YouTube : Skippable 1920x1080px',notes:''},
-  {id:'p3b-v3',phase:'phase3bis',titre:'Valeurs (rappel)',statut:'planifié',canaux:'META, LinkedIn, Grants',responsable:'—',ligne:'19/10/2026',funnel:'TOFU + MOFU',
+   objectif:`Rappel mission Caritas après les phases urgence/migration. La confiance est construite, on rappelle qui on est avant la conversion.`,
+   formats:`META : Reels 1080x1920px · Feed 1080x1350px|YouTube : Skippable 1920x1080px`,notes:``},
+  {id:'p3b-v3',phase:'phase3bis',titre:`Valeurs (rappel)`,statut:'planifié',canaux:'META, LinkedIn, Grants',responsable:`—`,ligne:'19/10/2026',funnel:'TOFU + MOFU',
    budget_meta:'1 000€',budget_yt:'–',budget_li:'1 200€',budget_search:'–',budget_total:'2 200€',
-   objectif:'Rappel des 4 valeurs vécues. Réutiliser ou rafraîchir les formats Phase 1. Dernière couche de confiance avant la conversion.',
-   formats:'META : Carrousel 1080x1080px · Feed 1080x1350px|LinkedIn : Sponsored Content 1200x1200px · 1200x628px',notes:''},
+   objectif:`Rappel des 4 valeurs vécues. Réutiliser ou rafraîchir les formats Phase 1. Dernière couche de confiance avant la conversion.`,
+   formats:`META : Carrousel 1080x1080px · Feed 1080x1350px|LinkedIn : Sponsored Content 1200x1200px · 1200x628px`,notes:``},
 
   // PHASE 4 — À définir
-  {id:'p4-c1',phase:'phase4',titre:'À définir en meeting',statut:'à définir en fonction du sujet',canaux:'À définir',responsable:'—',ligne:'09/11/2026',funnel:'À définir',
+  {id:'p4-c1',phase:'phase4',titre:`À définir en meeting`,statut:'à définir en fonction du sujet',canaux:'À définir',responsable:`—`,ligne:'09/11/2026',funnel:'À définir',
    budget_meta:'–',budget_yt:'–',budget_li:'–',budget_search:'–',budget_total:'10 000€ (phase)',
-   objectif:'Contenu à définir lors du meeting mensuel.',formats:'À définir en meeting',notes:''},
-  {id:'p4-c2',phase:'phase4',titre:'À définir en meeting',statut:'à définir en fonction du sujet',canaux:'À définir',responsable:'—',ligne:'09/11/2026',funnel:'À définir',
+   objectif:`Contenu à définir lors du meeting mensuel.`,formats:`À définir en meeting`,notes:``},
+  {id:'p4-c2',phase:'phase4',titre:`À définir en meeting`,statut:'à définir en fonction du sujet',canaux:'À définir',responsable:`—`,ligne:'09/11/2026',funnel:'À définir',
    budget_meta:'–',budget_yt:'–',budget_li:'–',budget_search:'–',budget_total:'–',
-   objectif:'Contenu à définir lors du meeting mensuel.',formats:'À définir en meeting',notes:''},
-  {id:'p4-c3',phase:'phase4',titre:'À définir en meeting',statut:'à définir en fonction du sujet',canaux:'À définir',responsable:'—',ligne:'09/11/2026',funnel:'À définir',
+   objectif:`Contenu à définir lors du meeting mensuel.`,formats:`À définir en meeting`,notes:``},
+  {id:'p4-c3',phase:'phase4',titre:`À définir en meeting`,statut:'à définir en fonction du sujet',canaux:'À définir',responsable:`—`,ligne:'09/11/2026',funnel:'À définir',
    budget_meta:'–',budget_yt:'–',budget_li:'–',budget_search:'–',budget_total:'–',
-   objectif:'Contenu à définir lors du meeting mensuel.',formats:'À définir en meeting',notes:''},
-  {id:'p4-c4',phase:'phase4',titre:'À définir en meeting',statut:'à définir en fonction du sujet',canaux:'À définir',responsable:'—',ligne:'09/11/2026',funnel:'À définir',
+   objectif:`Contenu à définir lors du meeting mensuel.`,formats:`À définir en meeting`,notes:``},
+  {id:'p4-c4',phase:'phase4',titre:`À définir en meeting`,statut:'à définir en fonction du sujet',canaux:'À définir',responsable:`—`,ligne:'09/11/2026',funnel:'À définir',
    budget_meta:'–',budget_yt:'–',budget_li:'–',budget_search:'–',budget_total:'–',
-   objectif:'Contenu à définir lors du meeting mensuel.',formats:'À définir en meeting',notes:''},
-  {id:'p4-c5',phase:'phase4',titre:'À définir en meeting',statut:'à définir en fonction du sujet',canaux:'À définir',responsable:'—',ligne:'09/11/2026',funnel:'À définir',
+   objectif:`Contenu à définir lors du meeting mensuel.`,formats:`À définir en meeting`,notes:``},
+  {id:'p4-c5',phase:'phase4',titre:`À définir en meeting`,statut:'à définir en fonction du sujet',canaux:'À définir',responsable:`—`,ligne:'09/11/2026',funnel:'À définir',
    budget_meta:'–',budget_yt:'–',budget_li:'–',budget_search:'–',budget_total:'–',
-   objectif:'Contenu à définir lors du meeting mensuel.',formats:'À définir en meeting',notes:''},
+   objectif:`Contenu à définir lors du meeting mensuel.`,formats:`À définir en meeting`,notes:``},
 
   // PHASE 5 — À définir
-  {id:'p5-c1',phase:'phase5',titre:'À définir en meeting',statut:'planifié',canaux:'À définir',responsable:'—',ligne:'07/12/2026',funnel:'BOFU',
+  {id:'p5-c1',phase:'phase5',titre:`À définir en meeting`,statut:'planifié',canaux:'À définir',responsable:`—`,ligne:'07/12/2026',funnel:'BOFU',
    budget_meta:'–',budget_yt:'–',budget_li:'–',budget_search:'–',budget_total:'22 000€ (phase)',
-   objectif:'Contenu conversion à définir lors du meeting mensuel.',formats:'À définir en meeting',notes:'CPA cible < 80€'},
-  {id:'p5-c2',phase:'phase5',titre:'À définir en meeting',statut:'planifié',canaux:'À définir',responsable:'—',ligne:'07/12/2026',funnel:'BOFU',
+   objectif:`Contenu conversion à définir lors du meeting mensuel.`,formats:`À définir en meeting`,notes:`CPA cible < 80€`},
+  {id:'p5-c2',phase:'phase5',titre:`À définir en meeting`,statut:'planifié',canaux:'À définir',responsable:`—`,ligne:'07/12/2026',funnel:'BOFU',
    budget_meta:'–',budget_yt:'–',budget_li:'–',budget_search:'–',budget_total:'–',
-   objectif:'Contenu conversion à définir lors du meeting mensuel.',formats:'À définir en meeting',notes:''},
-  {id:'p5-c3',phase:'phase5',titre:'À définir en meeting',statut:'planifié',canaux:'À définir',responsable:'—',ligne:'07/12/2026',funnel:'BOFU',
+   objectif:`Contenu conversion à définir lors du meeting mensuel.`,formats:`À définir en meeting`,notes:``},
+  {id:'p5-c3',phase:'phase5',titre:`À définir en meeting`,statut:'planifié',canaux:'À définir',responsable:`—`,ligne:'07/12/2026',funnel:'BOFU',
    budget_meta:'–',budget_yt:'–',budget_li:'–',budget_search:'–',budget_total:'–',
-   objectif:'Contenu conversion à définir lors du meeting mensuel.',formats:'À définir en meeting',notes:''},
-  {id:'p5-c4',phase:'phase5',titre:'À définir en meeting',statut:'planifié',canaux:'À définir',responsable:'—',ligne:'07/12/2026',funnel:'BOFU',
+   objectif:`Contenu conversion à définir lors du meeting mensuel.`,formats:`À définir en meeting`,notes:``},
+  {id:'p5-c4',phase:'phase5',titre:`À définir en meeting`,statut:'planifié',canaux:'À définir',responsable:`—`,ligne:'07/12/2026',funnel:'BOFU',
    budget_meta:'–',budget_yt:'–',budget_li:'–',budget_search:'–',budget_total:'–',
-   objectif:'Contenu conversion à définir lors du meeting mensuel.',formats:'À définir en meeting',notes:''},
-  {id:'p5-c5',phase:'phase5',titre:'À définir en meeting',statut:'planifié',canaux:'À définir',responsable:'—',ligne:'07/12/2026',funnel:'BOFU',
+   objectif:`Contenu conversion à définir lors du meeting mensuel.`,formats:`À définir en meeting`,notes:``},
+  {id:'p5-c5',phase:'phase5',titre:`À définir en meeting`,statut:'planifié',canaux:'À définir',responsable:`—`,ligne:'07/12/2026',funnel:'BOFU',
    budget_meta:'–',budget_yt:'–',budget_li:'–',budget_search:'–',budget_total:'–',
-   objectif:'Contenu conversion à définir lors du meeting mensuel.',formats:'À définir en meeting',notes:''},
+   objectif:`Contenu conversion à définir lors du meeting mensuel.`,formats:`À définir en meeting`,notes:``},
 ]
 
 function getStatutClass(s){
