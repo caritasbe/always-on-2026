@@ -41,6 +41,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--dark);
 .b-montage{background:#f0e6fb;color:#6b21a8;border:1px solid #d8b4fe;}
 .b-planifie{background:#f1f0e8;color:#5f5e5a;border:1px solid #d3d1c7;}
 .b-adefinir{background:#fff8ec;color:#d4730a;border:1px solid #ffd98a;}
+.b-prog{background:#e8f4fd;color:#005885;border:1px solid #b3d9f0;}
 .ch-pill{display:inline-block;font-size:10px;font-weight:500;padding:1px 6px;border-radius:3px;margin:1px 2px 1px 0;background:var(--beige);color:#8a4030;border:1px solid #e8c4b8;}
 .ch-li{background:#e8f4fd;color:#005885;border-color:#b3d9f0;}
 .sub-nav{display:flex;gap:6px;margin-bottom:1.25rem;}
@@ -205,9 +206,9 @@ tr:last-child td{border-bottom:none;}
 <div id="sec-budget" class="section">
   <div class="page-title"><h1>Budget & Funnel</h1><p>72 000€ activables + 120 000€ Google Grants · 4 canaux</p></div>
   <div class="funnel-grid">
-    <div class="f-card f-tofu"><div class="f-lbl">TOFU — Awareness</div><div class="f-amt">35 000€</div><div class="f-det">49% · YT, META, LinkedIn<br>2M+ personnes · CPM &lt; 8€</div></div>
-    <div class="f-card f-mofu"><div class="f-lbl">MOFU — Considération</div><div class="f-amt">15 000€</div><div class="f-det">21% · META, LinkedIn<br>Retargeting audiences chauffées</div></div>
-    <div class="f-card f-bofu"><div class="f-lbl">BOFU — Conversion</div><div class="f-amt">22 000€</div><div class="f-det">31% · META, Search, LinkedIn<br>+ 120k€ Grants · CPA &lt; 80€</div></div>
+    <div class="f-card f-tofu"><div class="f-lbl">TOFU — Awareness</div><div class="f-amt">28 000€</div><div class="f-det">39% · YT, META, LinkedIn<br>P1 + P2 + P3 + P3bis · CPM &lt; 8€</div></div>
+    <div class="f-card f-mofu"><div class="f-lbl">MOFU — Considération</div><div class="f-amt">22 000€</div><div class="f-det">31% · META, YT, LinkedIn<br>P2 + P3 + P4 · CTR &gt; 1.5%</div></div>
+    <div class="f-card f-bofu"><div class="f-lbl">BOFU — Conversion</div><div class="f-amt">22 000€</div><div class="f-det">31% · META, Search, LinkedIn<br>P5 + 120k€ Grants · CPA &lt; 80€</div></div>
   </div>
   <div class="card">
     <div class="card-title">Répartition par canal</div>
@@ -246,7 +247,7 @@ const PHASES = {
 const LP_URL = "https://caritasinternational.sharepoint.com/:x:/r/sites/Dep.COMMOB/Documents%20partages/Com%20Int-Ext/2.%20Online%20external/Digital%20Marketing/02.%20Strategy%20%26%20Dashboards/STRATEGY/STRATEGIE%20DIGITAL%20MARKETING/ALWAYS%20ON/ALWAYS-ON_URLS.xlsx?d=w375688780934415d912fe4b8023c397b&csf=1&web=1&e=5ifxWr";
 
 const LIVRABLES = [
-  {id:"p1-v1", phase:"phase1", statut:"livré", responsable:"Maude", ligne:"08/07/2026", funnel:"TOFU", bm:"1 300€", by:"800€", bl:"–", bs:"–", bt:"2 100€",
+  {id:"p1-v1", phase:"phase1", statut:"programmé", responsable:"Maude", ligne:"08/07/2026", funnel:"TOFU", bm:"1 300€", by:"800€", bl:"–", bs:"–", bt:"2 100€",
    canaux:"META, YouTube, Grants",
    titre:"Réseau mondial",
    objectif:"Montrer que Caritas est un réseau de 162 organisations présentes dans 200 pays. Créer un sentiment d'ampleur et de légitimité.",
@@ -302,7 +303,7 @@ const LIVRABLES = [
    formats:"META : Feed 1080x1080px · 1080x1350px · In-stream 1280x720px|YouTube : Skippable 1920x1080px",
    notes:""},
 
-  {id:"p2-c5", phase:"phase2", statut:"planifié", responsable:"–", ligne:"10/08/2026", funnel:"MOFU", bm:"–", by:"1 000€", bl:"–", bs:"1 000€", bt:"2 000€",
+  {id:"p2-c5", phase:"phase2", statut:"en montage", responsable:"–", ligne:"10/08/2026", funnel:"MOFU", bm:"–", by:"1 000€", bl:"–", bs:"1 000€", bt:"2 000€",
    canaux:"YouTube, Search, Grants",
    titre:"Plaidoyer — Droit International",
    objectif:"Positionner Caritas comme voix experte sur les droits humains et le droit international humanitaire. Légitimité institutionnelle auprès des médias et décideurs.",
@@ -351,6 +352,13 @@ const LIVRABLES = [
    formats:"META : Feed 1080x1080px · Reels 1080x1920px|YouTube : Shorts 1080x1920px · Skippable 1920x1080px",
    notes:""},
 
+  {id:"p3b-v0", phase:"phase3bis", statut:"planifié", responsable:"–", ligne:"19/10/2026", funnel:"TOFU", bm:"1 000€", by:"800€", bl:"–", bs:"–", bt:"1 800€",
+   canaux:"META, YouTube, LinkedIn, Grants",
+   titre:"Projet (1 vidéo)",
+   objectif:"Présenter un projet Caritas concret en lien avec le rappel d'identité. Réancrer la mission via une réalisation tangible avant la phase de conversion.",
+   formats:"META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px|YouTube : Skippable 1920x1080px|LinkedIn : Vidéo sponsorisée 1920x1080px",
+   notes:""},
+
   {id:"p3b-v1", phase:"phase3bis", statut:"planifié", responsable:"–", ligne:"19/10/2026", funnel:"TOFU", bm:"1 200€", by:"800€", bl:"–", bs:"–", bt:"2 000€",
    canaux:"META, YouTube, Grants",
    titre:"Réseau mondial (rappel)",
@@ -373,44 +381,56 @@ const LIVRABLES = [
    notes:""},
 
   {id:"p4-c1", phase:"phase4", statut:"à définir", responsable:"–", ligne:"09/11/2026", funnel:"À définir", bm:"–", by:"–", bl:"–", bs:"–", bt:"10 000€ (phase)",
-   canaux:"À définir en meeting", titre:"À définir en meeting",
-   objectif:"Contenu à définir lors du meeting mensuel.",
-   formats:"À définir en meeting", notes:""},
-
+   canaux:"À définir", titre:"À définir",
+   objectif:"À définir lors du meeting mensuel.",
+   formats:"À définir", notes:""},
   {id:"p4-c2", phase:"phase4", statut:"à définir", responsable:"–", ligne:"09/11/2026", funnel:"À définir", bm:"–", by:"–", bl:"–", bs:"–", bt:"–",
-   canaux:"À définir en meeting", titre:"À définir en meeting",
-   objectif:"Contenu à définir lors du meeting mensuel.",
-   formats:"À définir en meeting", notes:""},
-
+   canaux:"À définir", titre:"À définir",
+   objectif:"À définir lors du meeting mensuel.",
+   formats:"À définir", notes:""},
   {id:"p4-c3", phase:"phase4", statut:"à définir", responsable:"–", ligne:"09/11/2026", funnel:"À définir", bm:"–", by:"–", bl:"–", bs:"–", bt:"–",
-   canaux:"À définir en meeting", titre:"À définir en meeting",
-   objectif:"Contenu à définir lors du meeting mensuel.",
-   formats:"À définir en meeting", notes:""},
+   canaux:"À définir", titre:"À définir",
+   objectif:"À définir lors du meeting mensuel.",
+   formats:"À définir", notes:""},
+  {id:"p4-c4", phase:"phase4", statut:"à définir", responsable:"–", ligne:"09/11/2026", funnel:"À définir", bm:"–", by:"–", bl:"–", bs:"–", bt:"–",
+   canaux:"À définir", titre:"À définir",
+   objectif:"À définir lors du meeting mensuel.",
+   formats:"À définir", notes:""},
+  {id:"p4-c5", phase:"phase4", statut:"à définir", responsable:"–", ligne:"09/11/2026", funnel:"À définir", bm:"–", by:"–", bl:"–", bs:"–", bt:"–",
+   canaux:"À définir", titre:"À définir",
+   objectif:"À définir lors du meeting mensuel.",
+   formats:"À définir", notes:""},
 
   {id:"p5-c1", phase:"phase5", statut:"planifié", responsable:"–", ligne:"07/12/2026", funnel:"BOFU", bm:"–", by:"–", bl:"–", bs:"–", bt:"22 000€ (phase)",
-   canaux:"À définir en meeting", titre:"À définir en meeting",
-   objectif:"Contenu conversion à définir lors du meeting mensuel.",
-   formats:"À définir en meeting", notes:"CPA cible < 80€"},
-
+   canaux:"À définir", titre:"À définir",
+   objectif:"À définir lors du meeting mensuel.",
+   formats:"À définir", notes:"CPA cible < 80€"},
   {id:"p5-c2", phase:"phase5", statut:"planifié", responsable:"–", ligne:"07/12/2026", funnel:"BOFU", bm:"–", by:"–", bl:"–", bs:"–", bt:"–",
-   canaux:"À définir en meeting", titre:"À définir en meeting",
-   objectif:"Contenu conversion à définir lors du meeting mensuel.",
-   formats:"À définir en meeting", notes:""},
-
+   canaux:"À définir", titre:"À définir",
+   objectif:"À définir lors du meeting mensuel.",
+   formats:"À définir", notes:""},
   {id:"p5-c3", phase:"phase5", statut:"planifié", responsable:"–", ligne:"07/12/2026", funnel:"BOFU", bm:"–", by:"–", bl:"–", bs:"–", bt:"–",
-   canaux:"À définir en meeting", titre:"À définir en meeting",
-   objectif:"Contenu conversion à définir lors du meeting mensuel.",
-   formats:"À définir en meeting", notes:""},
+   canaux:"À définir", titre:"À définir",
+   objectif:"À définir lors du meeting mensuel.",
+   formats:"À définir", notes:""},
+  {id:"p5-c4", phase:"phase5", statut:"planifié", responsable:"–", ligne:"07/12/2026", funnel:"BOFU", bm:"–", by:"–", bl:"–", bs:"–", bt:"–",
+   canaux:"À définir", titre:"À définir",
+   objectif:"À définir lors du meeting mensuel.",
+   formats:"À définir", notes:""},
+  {id:"p5-c5", phase:"phase5", statut:"planifié", responsable:"–", ligne:"07/12/2026", funnel:"BOFU", bm:"–", by:"–", bl:"–", bs:"–", bt:"–",
+   canaux:"À définir", titre:"À définir",
+   objectif:"À définir lors du meeting mensuel.",
+   formats:"À définir", notes:""},
 ];
 
 </script>
 <script>
 function getBadgeClass(s) {
-  var m = {"livré":"b-livre","live":"b-live","en montage":"b-montage","planifié":"b-planifie","à définir":"b-adefinir"};
+  var m = {"livré":"b-livre","live":"b-live","en montage":"b-montage","planifié":"b-planifie","à définir":"b-adefinir","programmé":"b-prog"};
   return m[(s||"").toLowerCase()] || "b-adefinir";
 }
 function getBadgeLabel(s) {
-  var m = {"livré":"Livré","live":"Live","en montage":"En montage","planifié":"Planifié","à définir":"À définir"};
+  var m = {"livré":"Livré","live":"Live","en montage":"En montage","planifié":"Planifié","à définir":"À définir","programmé":"Programmé"};
   return m[(s||"").toLowerCase()] || s || "–";
 }
 function pills(canaux) {
