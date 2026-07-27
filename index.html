@@ -247,14 +247,14 @@ const PHASES = {
 const LP_URL = "https://caritasinternational.sharepoint.com/:x:/r/sites/Dep.COMMOB/Documents%20partages/Com%20Int-Ext/2.%20Online%20external/Digital%20Marketing/02.%20Strategy%20%26%20Dashboards/STRATEGY/STRATEGIE%20DIGITAL%20MARKETING/ALWAYS%20ON/ALWAYS-ON_URLS.xlsx?d=w375688780934415d912fe4b8023c397b&csf=1&web=1&e=5ifxWr";
 
 const LIVRABLES = [
-  {id:"p1-v1", phase:"phase1", statut:"livré", responsable:"Maude", ligne:"08/07/2026", funnel:"TOFU", bm:"1 300€", by:"800€", bl:"–", bs:"–", bt:"2 100€",
+  {id:"p1-v1", phase:"phase1", statut:"terminé", responsable:"Maude", ligne:"08/07/2026", funnel:"TOFU", bm:"1 300€", by:"800€", bl:"–", bs:"–", bt:"2 100€",
    canaux:"META, YouTube, Grants",
    titre:"Réseau mondial",
    objectif:"Montrer que Caritas est un réseau de 162 organisations présentes dans 200 pays. Créer un sentiment d'ampleur et de légitimité.",
    formats:"META : Feed 1080x1080px · 1080x1350px · Reels 1080x1920px · Stories 1080x1920px|YouTube : Skippable 1920x1080px · Shorts 1080x1920px",
    notes:""},
 
-  {id:"p1-v2", phase:"phase1", statut:"livré", responsable:"Maude", ligne:"08/07/2026", funnel:"TOFU", bm:"1 300€", by:"800€", bl:"–", bs:"–", bt:"2 100€",
+  {id:"p1-v2", phase:"phase1", statut:"terminé", responsable:"Maude", ligne:"08/07/2026", funnel:"TOFU", bm:"1 300€", by:"800€", bl:"–", bs:"–", bt:"2 100€",
    canaux:"META, YouTube, Grants",
    titre:"Qui sommes-nous ? (une personne = un projet)",
    objectif:"Humaniser Caritas en cassant l'image d'institution abstraite. On suit une personne réelle et ce que Caritas a changé dans sa trajectoire.",
@@ -426,11 +426,11 @@ const LIVRABLES = [
 </script>
 <script>
 function getBadgeClass(s) {
-  var m = {"livré":"b-livre","live":"b-live","en montage":"b-montage","planifié":"b-planifie","à définir":"b-adefinir","programmé":"b-prog"};
+  var m = {"livré":"b-livre","terminé":"b-livre","live":"b-live","en montage":"b-montage","planifié":"b-planifie","à définir":"b-adefinir","programmé":"b-prog"};
   return m[(s||"").toLowerCase()] || "b-adefinir";
 }
 function getBadgeLabel(s) {
-  var m = {"livré":"Livré","live":"Live","en montage":"En montage","planifié":"Planifié","à définir":"À définir","programmé":"Programmé"};
+  var m = {"livré":"Livré","terminé":"Terminé","live":"Live","en montage":"En montage","planifié":"Planifié","à définir":"À définir","programmé":"Programmé"};
   return m[(s||"").toLowerCase()] || s || "–";
 }
 function pills(canaux) {
